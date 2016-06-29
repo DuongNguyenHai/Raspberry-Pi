@@ -30,8 +30,8 @@ int main(int argc, char *argv[])
     if ( (sockfd = socket(AF_INET, SOCK_STREAM, 0)) < 0) 
         error("ERROR opening socket");
 
-    server = gethostbyname(argv[1]);
-    // server = gethostbyname("127.0.0.1");
+    // server = gethostbyname(argv[1]);
+    server = gethostbyname("127.0.0.1");
 
     if (server == NULL) {
         error("ERROR, no such host");
@@ -47,7 +47,6 @@ int main(int argc, char *argv[])
         error("ERROR connecting");
     
     while(1){
-
         printf("Please enter the message: ");
         bzero(buffer,256);
         fgets(buffer,255,stdin);

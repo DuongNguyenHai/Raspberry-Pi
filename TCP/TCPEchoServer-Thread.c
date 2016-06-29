@@ -32,8 +32,7 @@ int main(int argc, char *argv[])
 	clntSock = AcceptTCPConnection(servSock);
 
         /* Create separate memory for client argument */
-        if ((threadArgs = (struct ThreadArgs *) malloc(sizeof(struct ThreadArgs))) 
-               == NULL)
+        if ((threadArgs = (struct ThreadArgs *) malloc(sizeof(struct ThreadArgs))) == NULL)
             DieWithError("malloc() failed");
         threadArgs -> clntSock = clntSock;
 
