@@ -7,6 +7,7 @@
 #include <netinet/in.h>
 #include <netdb.h> 
 
+#define maxBuffer   256
 void error(const char *msg)
 {
     perror(msg);
@@ -19,7 +20,7 @@ int main(int argc, char *argv[])
     struct sockaddr_in serv_addr;
     struct hostent *server;
 
-    char buffer[256];
+    char buffer[maxBuffer];
     // if (argc < 3) {
     //    fprintf(stderr,"usage %s hostname port\n", argv[0]);
     //    exit(0);
@@ -47,12 +48,15 @@ int main(int argc, char *argv[])
         error("ERROR connecting");
     
     while(1){
-        printf("Please enter the message: ");
-        bzero(buffer,256);
-        fgets(buffer,255,stdin);
-        n = write(sockfd,buffer,strlen(buffer));
+        printf("Message: ");
+
+        fgets(buffer,maxBuffer,stdin);
+        printf("%lu\n",strlen(buffer));
+        n = write(sockfd,buffer,strlen(buffer)-1);
         if (n < 0) 
             error("ERROR writing to socket");
+
+        bzero(buffer,strlen(buffer));
     }
 
     close(sockfd);
