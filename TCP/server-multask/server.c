@@ -100,7 +100,7 @@ void *HandleClient(void *threadArgs){
     clntSock_thread = ((struct ThreadArgs *) threadArgs) -> clntSock;
     while(1){
         n = read(clntSock_thread,buffer,255);
-        printf("%d\n",n);
+        // printf("%d\n",n);
         fflush(stdout);
         if (n < 0) 
             error("ERROR reading from socket");
