@@ -52,7 +52,7 @@ int main(int argc, char *argv[])
 
         fgets(buffer,maxBuffer,stdin);
         printf("%lu\n",strlen(buffer));
-        n = write(sockfd,buffer,strlen(buffer)-1);
+        n = write(sockfd,buffer,strlen(buffer)-1);  // strlen(buffer)-1 : to ignore '\n' at last
         if (n < 0) 
             error("ERROR writing to socket");
 

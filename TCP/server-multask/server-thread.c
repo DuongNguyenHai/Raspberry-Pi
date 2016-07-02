@@ -79,13 +79,13 @@ int main(int argc, char *argv[])
 
         // std::cout<<"+ New client["<<clntSock<<"]["<<inet_ntoa(cli_addr.sin_addr)<<"]["<<ntohs(cli_addr.sin_port)<<"]"<<"[Thread:"<<(long int) threadID<<"]\n";
 
-        printf("\n+ New client[%d][Addr:%s][Port:%d][Thread:%ld]\n\n", clntSock, inet_ntoa(cli_addr.sin_addr), ntohs(cli_addr.sin_port), (long int) threadID);
+        printf("\n+ New client[%d][Addr:%s][Port:%d][Thread:%ld]\n\n", 
+            clntSock, inet_ntoa(cli_addr.sin_addr), ntohs(cli_addr.sin_port), (long int) threadID);
         // fflush(stdout);
     }
 
     // n = write(newsockfd,"I got your message",18);
     // if (n < 0) error("ERROR writing to socket");
-    //     close(newsockfd);
 
     close(servSock);
 
@@ -96,7 +96,7 @@ void *HandleClient(void *threadArgs){
     int n;
     int clntSock_thread;
     char buffer[256];
-    bzero(buffer,strlen(buffer));
+    bzero(buffer,256);
     clntSock_thread = ((struct ThreadArgs *) threadArgs) -> clntSock;
     while(1){
         n = read(clntSock_thread,buffer,255);
@@ -107,7 +107,7 @@ void *HandleClient(void *threadArgs){
         else if(n>0){
             printf(". Client[%d]: %s\n",clntSock_thread,buffer);
             fflush(stdout);
-            bzebzero(buffer,strlen(buffer));
+            bzero(buffer,strlen(buffer));
         }      
     }
 }
