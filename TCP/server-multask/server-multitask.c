@@ -96,7 +96,7 @@ void *HandleClient(void *threadArgs){
     int n;
     int clntSock_thread;
     char buffer[256];
-    bzero(buffer,strlen(buffer));
+    bzero(buffer, 256);
     clntSock_thread = ((struct ThreadArgs *) threadArgs) -> clntSock;
     while(1){
         n = read(clntSock_thread,buffer,255);
@@ -107,7 +107,7 @@ void *HandleClient(void *threadArgs){
         else if(n>0){
             printf(". Client[%d]: %s\n",clntSock_thread,buffer);
             fflush(stdout);
-            bzebzero(buffer,strlen(buffer));
+            bzero(buffer,strlen(buffer));
         }      
     }
 }
