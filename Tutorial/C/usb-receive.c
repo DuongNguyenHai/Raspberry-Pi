@@ -17,9 +17,7 @@ int main(){
 				printf("%c",c);
 				fflush (stdout);
 			}while(serialDataAvail(fd));
-
 		}
-		
 	}
 	return 0;
 }

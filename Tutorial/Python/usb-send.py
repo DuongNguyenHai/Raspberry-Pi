@@ -14,10 +14,14 @@ ser = serial.Serial(
 
 counter=0
 
-while 1:
+try:
+	# ham code chinh o day
+    while True:
         ser.write(str(counter).encode())
         print(counter,end="")
-        time.sleep(1)
         counter +=1
         if counter > 10:
-                counter=0
+            counter=0
+        time.sleep(1)
+except KeyboardInterrupt:
+	ser.close()

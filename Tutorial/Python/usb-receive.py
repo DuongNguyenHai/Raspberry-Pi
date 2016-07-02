@@ -12,8 +12,11 @@ ser = serial.Serial(
 	timeout=1
 )
 
-while 1:
-	x=ser.read()
-	data=x.decode()
-	data=data.rstrip()
-	print(data,end="")
+try:
+    while True:
+        x=ser.read()
+        data=x.decode()
+        data=data.rstrip()
+        print(data,end="")
+except KeyboardInterrupt:
+	ser.close()
