@@ -11,7 +11,7 @@
 #define	SS0	8
 
 int main(){
-	unsigned char buff[6] = "abc\n";
+	unsigned char buff[4] = "abc\n";
 	pinMode(SS0, OUTPUT);
 	digitalWrite(SS0, 1);
 	int fd;
@@ -26,7 +26,7 @@ int main(){
 		printf("%s",buff);
 		fflush(stdout);
 		digitalWrite(SS0, 0);
-		write (fd, buff, 6) ;
+		write (fd, buff, 4) ;
 		digitalWrite(SS0, 1);
 		delay(1000);
 	}

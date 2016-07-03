@@ -29,9 +29,9 @@ int main(){
 		fflush(stdout);
 		digitalWrite(SS0, 0);
 		write (fd, buff, 1);
-		digitalWrite(SS0, 1);
 		delayMicroseconds(20);
 		read (fd, c, 1);
+		digitalWrite(SS0, 1);
 		printf(",Receive:%s\n",c);
 		fflush(stdout);
 		

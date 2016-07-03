@@ -6,7 +6,7 @@ import binascii
 
 spi = spidev.SpiDev() # create spi object
 spi.open(0, 0)# open spi port 0, device (CS) 0
-spi.max_speed_hz = 5000
+spi.max_speed_hz = 500000
 
 try:
 	# ham code chinh o day

@@ -14,6 +14,8 @@ ser = serial.Serial(
 
 counter=0
 
+print("Raspberry's sending : ")
+
 try:
 	# ham code chinh o day
     while True:

@@ -12,6 +12,8 @@ ser = serial.Serial(
 	timeout=1
 )
 
+print("Raspberry's receiving : ")
+
 try:
     while True:
         x=ser.read()
