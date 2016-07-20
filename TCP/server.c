@@ -1,4 +1,4 @@
-/* A simple server in the internet domain using TCP
+/* A simple serv_addr in the internet domain using TCP
    The port number is passed as an argument */
 #include <stdio.h>
 #include <stdlib.h>
@@ -9,6 +9,8 @@
 #include <netinet/in.h>
 
 #define MAXPENDING 5
+#define BUFFSIZE 256
+#define PORT 8888
 
 void error(const char *msg)
 {
@@ -18,62 +20,54 @@ void error(const char *msg)
 
 int main(int argc, char *argv[])
 {
-    int sockfd, newsockfd, portno;
-    socklen_t clilen;
-    char buffer[256];
+    int servSock, clntfd, n;
+    socklen_t clntLen;
+    char buffer[BUFFSIZE];
     struct sockaddr_in serv_addr, cli_addr;
-    int n;
 
-    // if (argc < 2) {
-    //     fprintf(stderr,"ERROR, no port provided\n");
-    //     exit(1);
-    // }
-
-    // Create a socket
-    if ( (sockfd = socket(AF_INET, SOCK_STREAM, 0)) < 0) 
+    // Create socket for incoming connections
+    if ((servSock = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP)) < 0)
         error("ERROR opening socket");
-
-    bzero((char *) &serv_addr, sizeof(serv_addr));
-    // portno = atoi(argv[1]);
-    portno = 5010;
-
-    serv_addr.sin_family = AF_INET;
-    serv_addr.sin_addr.s_addr = INADDR_ANY;
-    serv_addr.sin_port = htons(portno);
+      
+    // Construct local address structure
+    memset(&serv_addr, 0, sizeof(serv_addr));       /* Zero out structure */
+    serv_addr.sin_family = AF_INET;                /* Internet address family */
+    serv_addr.sin_addr.s_addr = htonl(INADDR_ANY); /* Any incoming interface */
+    serv_addr.sin_port = htons(PORT);              /* Local port */
 
     // Bind to the local address
-    if ( bind(sockfd, (struct sockaddr *) &serv_addr, sizeof(serv_addr)) < 0) 
+    if (bind(servSock, (struct sockaddr *) &serv_addr, sizeof(serv_addr)) < 0)
         error("ERROR on binding");
 
-    /* Mark the socket so it will listen for incoming connections */
-    if ( listen(sockfd, MAXPENDING) < 0)
-        error("listen() failed");
+    // Mark the socket so it will listen for incoming connections 
+    if (listen(servSock, MAXPENDING) < 0)
+        error("ERROR on binding");
 
-    /* Set the size of the in-out parameter */
-    clilen = sizeof(cli_addr);
-    /* Wait for a client to connect */
-    if( (newsockfd = accept(sockfd, (struct sockaddr *) &cli_addr, &clilen)) < 0)
+    // Set the size of the in-out parameter
+    clntLen = sizeof(cli_addr);
+    
+    // Wait for a client to connect
+    if ((clntfd = accept(servSock, (struct sockaddr *) &cli_addr, &clntLen)) < 0)
         error("accept() failed");
 
-    bzero(buffer,256);
+    bzero(buffer,BUFFSIZE);
 
     while(1){
-        n = read(newsockfd,buffer,255);
-        if (n < 0) 
+        n = recv(clntfd,buffer,BUFFSIZE,0);
+        if ( n<0 ) 
             error("ERROR reading from socket");
-        else if(n>0){
+        else if( n>0 ){
             printf("Here is the message: %s\n",buffer);
             fflush(stdout);
-            bzero(buffer,256);
-        }      
+            bzero(buffer,BUFFSIZE);
+        }
+        else{
+            printf("Client disconnect !\n");
+            break;
+        }
     }
-    
 
-    // n = write(newsockfd,"I got your message",18);
-    // if (n < 0) error("ERROR writing to socket");
-    //     close(newsockfd);
-
-    close(sockfd);
+    close(servSock);
 
     return 0; 
 }

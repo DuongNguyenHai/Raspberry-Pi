@@ -2,7 +2,7 @@
 
 int main(void)
 {
-    wiringPiSetupGPIO();
+    wiringPiSetupGpio();
     pinMode(17, OUTPUT);
     pinMode(2, INPUT);
     pullUpDnControl (2, PUD_UP);

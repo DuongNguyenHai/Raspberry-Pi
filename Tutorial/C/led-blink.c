@@ -2,7 +2,7 @@
 
 int main(void)
 {
-    wiringPiSetupGPIO();
+    wiringPiSetupGpio();
     pinMode(17, OUTPUT);
     
     while(1)

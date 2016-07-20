@@ -1,60 +1,49 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <string.h>
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <netdb.h> 
+#include <stdio.h>      /* for printf() and fprintf() */
+#include <sys/socket.h> /* for socket(), connect(), send(), and recv() */
+#include <arpa/inet.h>  /* for sockaddr_in and inet_addr() */
+#include <stdlib.h>     /* for atoi() and exit() */
+#include <string.h>     /* for memset() */
+#include <unistd.h>     /* for close() */
 
-void error(const char *msg)
-{
+#define BUFFSIZE 256
+#define PORT 8888
+
+void error(const char *msg){
     perror(msg);
     exit(0);
 }
 
-int main(int argc, char *argv[])
-{
-    int sockfd, portno, n;
+int main(int argc, char *argv[]){
+
+    int sockfd, n;
     struct sockaddr_in serv_addr;
-    struct hostent *server;
+    char buffer[BUFFSIZE];
+    char *servIP = "127.0.0.1";
 
-    char buffer[256];
-    // if (argc < 3) {
-    //    fprintf(stderr,"usage %s hostname port\n", argv[0]);
-    //    exit(0);
-    // }
-    // portno = atoi(argv[2]);
-    portno = 5010;
+    // Tao socket
+    if ((sockfd = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP)) < 0)
+        error("socket() failed");
 
-    if ( (sockfd = socket(AF_INET, SOCK_STREAM, 0)) < 0) 
-        error("ERROR opening socket");
+    /* Ghi cau truc dia chi cho server */
+    memset(&serv_addr, 0, sizeof(serv_addr));               /* Zero out structure */
+    serv_addr.sin_family      = PF_INET;                    /* Internet address family */
+    serv_addr.sin_addr.s_addr = inet_addr(servIP);          /* Server IP address */
+    serv_addr.sin_port        = htons(PORT);                /* Server port */
 
-    // server = gethostbyname(argv[1]);
-    server = gethostbyname("127.0.0.1");
-
-    if (server == NULL) {
-        error("ERROR, no such host");
-    }
-
-    bzero((char *) &serv_addr, sizeof(serv_addr));
-
-    serv_addr.sin_family = AF_INET;
-    bcopy((char *)server->h_addr, (char *)&serv_addr.sin_addr.s_addr, server->h_length);
-    serv_addr.sin_port = htons(portno);
-
+    // Ket noi toi server
     if (connect(sockfd,(struct sockaddr *) &serv_addr,sizeof(serv_addr)) < 0) 
         error("ERROR connecting");
     
+    // Gui du lieu
     while(1){
-        printf("Please enter the message: ");
-        bzero(buffer,256);
-        fgets(buffer,255,stdin);
-        n = write(sockfd,buffer,strlen(buffer));
-        if (n < 0) 
+        printf("message: ");
+        bzero(buffer,BUFFSIZE);
+        fgets(buffer,BUFFSIZE,stdin);
+        if ( send(sockfd,buffer,strlen(buffer)-1,0) < 0) 
             error("ERROR writing to socket");
     }
 
+    // Dong client
     close(sockfd);
     return 0;
 }

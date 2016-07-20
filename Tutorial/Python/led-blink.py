@@ -8,5 +8,5 @@ GPIO.setup(17, GPIO.OUT)
 while True:
     GPIO.output(17, 1)
     sleep(1)            # tao tre 1s
-    GPIO.output(12, 0)
+    GPIO.output(17, 0)
     sleep(1)            # tao tre 1s
