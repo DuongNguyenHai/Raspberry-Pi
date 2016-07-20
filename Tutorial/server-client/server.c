@@ -1,11 +1,12 @@
-/* A simple serv_addr in the internet domain using TCP
-   The port number is passed as an argument */
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
+// Nguyen Hai Duong
+// simple server
+
+#include <stdio.h>          /* for printf() and fprintf() */
+#include <sys/socket.h>     /* for socket(), connect(), send(), and recv() */
+#include <stdlib.h>         /* for atoi() and exit() */
+#include <string.h>         /* for memset() */
+#include <unistd.h>         /* for close() */
 #include <sys/types.h> 
-#include <sys/socket.h>
 #include <netinet/in.h>
 
 #define MAXPENDING 5

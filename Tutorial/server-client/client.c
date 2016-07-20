@@ -1,7 +1,10 @@
+// Nguyen Hai Duong
+// simple server
+
 #include <stdio.h>      /* for printf() and fprintf() */
 #include <sys/socket.h> /* for socket(), connect(), send(), and recv() */
-#include <arpa/inet.h>  /* for sockaddr_in and inet_addr() */
 #include <stdlib.h>     /* for atoi() and exit() */
+#include <arpa/inet.h>  /* for sockaddr_in and inet_addr() */
 #include <string.h>     /* for memset() */
 #include <unistd.h>     /* for close() */
 
@@ -18,16 +21,14 @@ int main(int argc, char *argv[]){
     int sockfd, n;
     struct sockaddr_in serv_addr;
     char buffer[BUFFSIZE];
-    char *servIP = "127.0.0.1";
-    long port = 8888;
-    
-    if (argc < 2)
-    {
-        error("error !");
-    }
+    char *servIP;
 
-    port = atoi(argv[1]);
-    printf("%ld\n", port);
+    if(argc < 2){
+        fprintf(stderr, "Hay nhap: %s <Server IP> \n",argv[0]);
+        exit(1);
+    }
+    servIP = argv[1];       // localhost : "127.0.0.1"
+
     if ((sockfd = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP)) < 0)
         error("socket() failed");
 
@@ -35,7 +36,7 @@ int main(int argc, char *argv[]){
     memset(&serv_addr, 0, sizeof(serv_addr));               /* Zero out structure */
     serv_addr.sin_family      = PF_INET;                    /* Internet address family */
     serv_addr.sin_addr.s_addr = inet_addr(servIP);          /* Server IP address */
-    serv_addr.sin_port        = htons(port);                /* Server port */
+    serv_addr.sin_port        = htons(PORT);                /* Server port */
 
 
     if (connect(sockfd,(struct sockaddr *) &serv_addr,sizeof(serv_addr)) < 0) 
