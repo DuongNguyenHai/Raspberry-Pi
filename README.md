@@ -1,8 +1,11 @@
 ######Date : 12 Jun 2016
-######Coder : Nguyễn Hải Dương
-
+######Author : Nguyễn Hải Dương
 ## Raspberry-Pi
-
-Tổng hợp code trong tutorial về Raspberry Pi.
-###List bài căn bản bao gồm :
--   
+Tổng hợp code trong tutorial về Raspberry Pi. Phần lớn các bài được viết bằng 2 ngôn ngữ C và python
+List bài căn bản bao gồm :
+-   GPIO căn bản
+-   Giao tiếp I2C
+-   Giao tiếp SPI
+-   Giao tiếp USB
+Các project khác :
+-   Project server - client : dựa trên giao thức mạng TCP/IP
