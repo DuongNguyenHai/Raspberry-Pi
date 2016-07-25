@@ -13,4 +13,4 @@ Tổng hợp code trong tutorial về Raspberry Pi. Phần lớn các bài đư�
 2.   Các project khác :
   - Project server - client : dựa trên giao thức mạng TCP/IP
 
-Các bài hướng dẫn dược đăng trong [smart-techvn.com](http://smart-techvn.com/bai-viet-ki-thuat/raspberry-pi)
+Các bài viết hướng dẫn được đăng trong [smart-techvn.com](http://smart-techvn.com/bai-viet-ki-thuat/raspberry-pi)
