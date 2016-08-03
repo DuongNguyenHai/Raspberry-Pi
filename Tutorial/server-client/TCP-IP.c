@@ -77,24 +77,3 @@ void *HandleThreadClient(void *threadArgs){
     }
     close(clntSock);
 }
-
-void HandleForkClient(int clntSock){
-	int recvMsgSize;                    /* Size of received message */
-    char buffer[BUFFSIZE];
-    bzero(buffer,BUFFSIZE);
-    
-    // while(1){
-        recvMsgSize = recv(clntSock,buffer,BUFFSIZE,0);
-        if (recvMsgSize < 0) 
-            error("ERROR reading from socket");
-        else if(recvMsgSize>0){
-            printf(". Client[%d]: %s\n",clntSock,buffer);
-            bzero(buffer,strlen(buffer));
-        }
-        else{
-            printf("- Client[%d]: disconnected !\n",clntSock);
-            // break;
-        }     
-    // }
-    // close(clntSock);
-}

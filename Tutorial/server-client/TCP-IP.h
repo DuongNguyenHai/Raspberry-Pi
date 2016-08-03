@@ -23,8 +23,5 @@ int CreateTCPServerSocket(unsigned short port);
 // Return server socket
 int AcceptTCPConnection(int servSock);
 
-// Function : TCP client handling
-void HandleForkClient(int clntSocket);
-
 // Show error message
 void error(const char *msg);

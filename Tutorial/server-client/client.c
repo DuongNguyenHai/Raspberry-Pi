@@ -3,8 +3,8 @@
 
 #include <stdio.h>      /* for printf() and fprintf() */
 #include <sys/socket.h> /* for socket(), connect(), send(), and recv() */
-#include <stdlib.h>     /* for atoi() and exit() */
 #include <arpa/inet.h>  /* for sockaddr_in and inet_addr() */
+#include <stdlib.h>     /* for atoi() and exit() */
 #include <string.h>     /* for memset() */
 #include <unistd.h>     /* for close() */
 
@@ -22,12 +22,12 @@ int main(int argc, char *argv[]){
     struct sockaddr_in serv_addr;
     char buffer[BUFFSIZE];
     char *servIP;
-
-    if(argc < 2){
-        fprintf(stderr, "Hay nhap: %s <Server IP> \n",argv[0]);
-        exit(1);
+    if (argc < 2)
+    {
+        servIP = "127.0.0.1";   // localhost
+    }else{
+        servIP = argv[1];
     }
-    servIP = argv[1];       // localhost : "127.0.0.1"
 
     if ((sockfd = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP)) < 0)
         error("socket() failed");
