@@ -1,7 +1,4 @@
-/*
- *  This sketch sends a message to a TCP server
- *
- */
+// WifiClientBasic.ino
 
 #include <ESP8266WiFi.h>
 #include <ESP8266WiFiMulti.h>
