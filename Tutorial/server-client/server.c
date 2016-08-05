@@ -21,7 +21,7 @@ void error(const char *msg)
 
 int main(int argc, char *argv[])
 {
-    int servSock, clntfd, n;
+    int servSock, clntSock, n;
     socklen_t clntLen;
     char buffer[BUFFSIZE];
     struct sockaddr_in serv_addr, cli_addr;
@@ -48,13 +48,13 @@ int main(int argc, char *argv[])
     clntLen = sizeof(cli_addr);
     
     // Wait for a client to connect
-    if ((clntfd = accept(servSock, (struct sockaddr *) &cli_addr, &clntLen)) < 0)
+    if ((clntSock = accept(servSock, (struct sockaddr *) &cli_addr, &clntLen)) < 0)
         error("accept() failed");
 
     bzero(buffer,BUFFSIZE);
 
     while(1){
-        n = recv(clntfd,buffer,BUFFSIZE,0);
+        n = recv(clntSock,buffer,BUFFSIZE,0);
         if ( n<0 ) 
             error("ERROR reading from socket");
         else if( n>0 ){

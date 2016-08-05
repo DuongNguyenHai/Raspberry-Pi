@@ -20,6 +20,7 @@ struct ThreadArgs
 {
     int clntSock;                      /* Socket descriptor for client */
 };
+
 void error(const char *msg)
 {
     perror(msg);
@@ -56,8 +57,6 @@ int main(int argc, char *argv[])
 
     // Set the size of the in-out parameter
     clntLen = sizeof(cli_addr);
-
-    printf("What's the fuck is going on ?\n");
 
     while(1){
         
