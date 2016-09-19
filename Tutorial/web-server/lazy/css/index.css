@@ -210,95 +210,20 @@ body {
   display: table;
   cursor: pointer;
 }
-.obj-timer .obj-icon,
-.obj-timer .obj-timer-val {
+.obj-timer .obj-icon {
   line-height: 35px;
   color: #ccc;
   display: table-cell;
   vertical-align: middle;
   text-align: center;
-}
-.obj-timer .obj-icon {
   font-size: 50px;
   -webkit-transition: 300ms;
   -o-transition: 300ms;
   transition: 300ms;
 }
-.obj-timer .obj-timer-val {
-  font-size: 20px;
-}
-/*.obj-timer:hover .obj-icon {
+.obj-timer:hover .obj-icon {
   color: inherit;
 }
-.obj-timer .obj-timer-set {
-  display: none;
-  position: relative;
-}
-.obj-timer-set .obj-timer-val {
-  color: inherit;
-  width: 45px;
-  display: inline-block;
-  font-size: 15px;
-  line-height: 30px;
-  height: 30px;
-  margin-top: 2px;
-  border-width: 0 0 1px 0;
-  border-style: dashed;
-  border-radius: 0;
-  border-bottom-color: transparent;
-  outline: none;
-  background: transparent;
-  pointer-events: none;
-  -webkit-transition: 300ms;
-  -o-transition: 300ms;
-  transition: 300ms;
-  position: relative;
-  z-index: 0;
-}
-.obj-timer-set .obj-timer-val:-moz-placeholder,
-.obj-timer-set .obj-timer-val::-moz-placeholder,
-.obj-timer-set .obj-timer-val:-ms-input-placeholder,
-.obj-timer-set .obj-timer-val::-webkit-input-placeholder,
-.obj-timer-set .obj-timer-val:disabled {
-  opacity: 1;
-}
-.obj-timer-set {
-  width: 94px;
-  display: table-cell;
-  vertical-align: middle;
-  text-align: center;
-}
-.obj-timer-set .obj-timer-on,
-.obj-timer-set .obj-timer-edit {
-  display: inline-block;
-  width: 23px;
-  height: 23px;
-  text-align: center;
-  border-radius: 50%;
-  background: #ccc;
-  cursor: pointer;
-  margin-top: 5px
-}
-.obj-timer-set .obj-timer-edit {
-  float: left;
-  margin-left: -8px;
-}
-.obj-timer-set .obj-timer-on {
-  float: right;
-  margin-right: -8px;
-}
-.obj-timer-set .obj-timer-on .fa, .obj-timer-set .obj-timer-edit .fa {
-  color: #fff;
-  line-height: 22px;
-}
-.obj-timer-set.timer-on .obj-timer-on,
-.obj-timer-set.timer-edit .obj-timer-edit {
-  background-color: #01c0c8;
-}
-.obj-timer-set.timer-edit .obj-timer-val,
-.obj-timer-set:hover .obj-timer-val {
-  border-bottom-color: #01c0c8;
-}*/
 
 /* -- Object send (obj-send) -- */
 
@@ -425,15 +350,6 @@ body {
 .object.turn-on .obj-counter-percent .fa {
   color: inherit;
 }
-/*.object.turn-on .obj-timer .obj-timer-set {
-  display: table-cell;
-}
-.object.turn-on .obj-timer .obj-icon {
-  display: none;
-}
-.obj-timer .obj-timer-set.timer-edit .obj-timer-val {
-  pointer-events: all;
-}*/
 
 /* -- Flavor oragne -- */
 
@@ -443,8 +359,6 @@ body {
 .object.flavor-orange .progress-bar {
   stroke: #fb9678;
 }
-.object.flavor-orange .obj-timer-set:hover .obj-timer-val,
-.object.flavor-orange .obj-timer-set.timer-edit .obj-timer-val,
 .object.flavor-orange .slider-range-min .ui-slider-handle:before {
   border-bottom-color: #fb9678;
 }
@@ -452,9 +366,7 @@ body {
 .object.flavor-orange .switch-button.switch-on,
 .object.flavor-orange .ui-widget-header,
 .object.flavor-orange .slider-range-min .ui-slider-handle,
-.object.flavor-orange .switch-button.switch-on,
-.object.flavor-orange .obj-timer-set.timer-on .obj-timer-on,
-.object.flavor-orange .obj-timer-set.timer-edit .obj-timer-edit {
+.object.flavor-orange .switch-button.switch-on {
   background-color: #fb9678;
 }
 
@@ -466,8 +378,6 @@ body {
 .object.flavor-green .progress-bar {
   stroke: #00c292;
 }
-.object.flavor-green .obj-timer-set:hover .obj-timer-val,
-.object.flavor-green .obj-timer-set.timer-edit .obj-timer-val,
 .object.flavor-green .slider-range-min .ui-slider-handle:before {
   border-bottom-color: #00c292;
 }
@@ -475,9 +385,7 @@ body {
 .object.flavor-green .switch-button.switch-on,
 .object.flavor-green .ui-widget-header,
 .object.flavor-green .slider-range-min .ui-slider-handle,
-.object.flavor-green .switch-button.switch-on,
-.object.flavor-green .obj-timer-set.timer-on .obj-timer-on,
-.object.flavor-green .obj-timer-set.timer-edit .obj-timer-edit {
+.object.flavor-green .switch-button.switch-on {
   background-color: #00c292;
 }
 
@@ -489,8 +397,6 @@ body {
 .object.flavor-violet .progress-bar {
   stroke: #ab8ce4;
 }
-.object.flavor-violet .obj-timer-set:hover .obj-timer-val,
-.object.flavor-violet .obj-timer-set.timer-edit .obj-timer-val,
 .object.flavor-violet .slider-range-min .ui-slider-handle:before {
   border-bottom-color: #ab8ce4;
 }
@@ -498,9 +404,7 @@ body {
 .object.flavor-violet .switch-button.switch-on,
 .object.flavor-violet .ui-widget-header,
 .object.flavor-violet .slider-range-min .ui-slider-handle,
-.object.flavor-violet .switch-button.switch-on,
-.object.flavor-violet .obj-timer-set.timer-on .obj-timer-on,
-.object.flavor-violet .obj-timer-set.timer-edit .obj-timer-edit {
+.object.flavor-violet .switch-button.switch-on {
   background-color: #ab8ce4;
 }
 

@@ -16,17 +16,16 @@ else
 // Create a new database
 $sql = 'CREATE DATABASE IF NOT EXISTS ' . dbName .'';
 if (mysqli_query($conn, $sql)) {
-    echo "Database created successfully" . PHP_EOL;
+    echo "Database 'home' created successfully" . PHP_EOL;
 } else {
     echo "Error creating database: " . mysqli_error($conn) . PHP_EOL;
 }
 
 // Select database
 $sql = 'USE ' . dbName . '';
-if (mysqli_query($conn, $sql)) {
-    echo "Database created successfully" . PHP_EOL;
-} else {
-    echo "Error creating database: " . mysqli_error($conn) . PHP_EOL;
+if ( !mysqli_query($conn, $sql)) {
+    
+    echo "Error use database: " . mysqli_error($conn) . PHP_EOL;
 }
 // sql to create table
 CreateTable($conn, "device");
@@ -36,7 +35,7 @@ CreateTable($conn, "device");
 InsertObject($conn,"obj-slider", "Living Room Light", 0, NULL, 30, "fa-lightbulb-o");
 InsertObject($conn,"obj-button", "Toilet Light", 0, "flavor-green", 30, "fa-lightbulb-o");
 InsertObject($conn,"obj-slider", "Bed Room Light", 0, "flavor-orange", 30, "fa-lightbulb-o");
-InsertObject($conn,"obj-button", "Font Door", 0, "flavor-violet", 0, 0);
+InsertObject($conn,"obj-button", "Font Door", 0, "flavor-violet", 0, "fa-wrench");
 
 // Delete object to database
 
@@ -68,7 +67,7 @@ function CreateTable($conn, $table) {
 		icon VARCHAR(15) DEFAULT 'fa-wrench'
 	)";
 	if (mysqli_query($conn, $sql)) {
-	    echo "Table device created successfully\n";
+	    echo "Table 'device' created successfully\n";
 	} else {
 	    echo "Error creating table: " . mysqli_error($conn);
 	}
@@ -81,7 +80,7 @@ function InsertObject($conn, $objType, $objName, $state, $objFalvor, $amplitude,
 	VALUES ('$objType', '$objName', '$state', '$objFalvor', '$amplitude', '$icon')";
 	// echo $sql . PHP_EOL;
 	if ($conn->query($sql) === TRUE)
-	    echo "New record created successfully" . PHP_EOL;
+	    echo "Create a new object successfully" . PHP_EOL;
 	else
 	    echo "Error: " . $sql . " : " . $conn->error . PHP_EOL;
 }
