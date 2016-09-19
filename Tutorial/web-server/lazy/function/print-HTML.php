@@ -8,7 +8,7 @@ function PrintObjectDatabase($conn) {
 	if ($result->num_rows > 0) {
 	    // output data of each row
 	    while($row = $result->fetch_assoc()) {
-	        PrintObject($row["type"], $row["name"], $row["state"], $row["flavor"], $row["consumption"], $row["amplitude"], $row["icon"]);
+	        PrintObject($row["type"], $row["name"], $row["state"], $row["flavor"], $row["amplitude"], $row["icon"]);
 	    }
 	} else {
 	    echo "0 results";
@@ -16,7 +16,7 @@ function PrintObjectDatabase($conn) {
 }
 
 // Print object
-function PrintObject($objType, $objName, $state, $objFalvor, $consumption, $amplitude, $icon) {
+function PrintObject($objType, $objName, $state, $objFalvor, $amplitude, $icon) {
 
 	if($state) {
 		$stateButton = "switch-on";

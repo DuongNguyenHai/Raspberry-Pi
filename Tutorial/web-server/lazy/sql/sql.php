@@ -32,11 +32,11 @@ if (mysqli_query($conn, $sql)) {
 CreateTable($conn, "device");
 
 // Insert object to database
-
-InsertObject($conn,"obj-slider", "Living Room Light", 0, NULL, NULL, 0, 30, "fa-lightbulb-o");
-InsertObject($conn,"obj-button", "Toilet Light", 0, "flavor-green", "0h", 0, 30, "fa-lightbulb-o");
-InsertObject($conn,"obj-slider", "Bed Room Light", 0, "flavor-orange", "10h20", 0, 30, "fa-lightbulb-o");
-InsertObject($conn,"obj-button", "Font Door", 0, "flavor-violet", NULL, 0, 0);
+// ex ; InsertObject($conn,object-type,object-name,initial-state,color,amplitude,icon);
+InsertObject($conn,"obj-slider", "Living Room Light", 0, NULL, 30, "fa-lightbulb-o");
+InsertObject($conn,"obj-button", "Toilet Light", 0, "flavor-green", 30, "fa-lightbulb-o");
+InsertObject($conn,"obj-slider", "Bed Room Light", 0, "flavor-orange", 30, "fa-lightbulb-o");
+InsertObject($conn,"obj-button", "Font Door", 0, "flavor-violet", 0, 0);
 
 // Delete object to database
 
@@ -64,7 +64,6 @@ function CreateTable($conn, $table) {
 		name VARCHAR(50) NOT NULL,
 		state BOOLEAN NOT NULL DEFAULT 0,
 		flavor VARCHAR(20) DEFAULT NULL,
-		consumption INT(6) DEFAULT 0,
 		amplitude INT(6) DEFAULT 0,
 		icon VARCHAR(15) DEFAULT 'fa-wrench'
 	)";
@@ -76,10 +75,10 @@ function CreateTable($conn, $table) {
 }
 
 // function insert object to table
-function InsertObject($conn, $objType, $objName, $state, $objFalvor, $consumption, $amplitude, $icon="fa-wrench") {
+function InsertObject($conn, $objType, $objName, $state, $objFalvor, $amplitude, $icon="fa-wrench") {
 	
-	$sql = "INSERT INTO " . TABLE . " (type, name, state, flavor, consumption, amplitude, icon)
-	VALUES ('$objType', '$objName', '$state', '$objFalvor', '$consumption', '$amplitude', '$icon')";
+	$sql = "INSERT INTO " . TABLE . " (type, name, state, flavor, amplitude, icon)
+	VALUES ('$objType', '$objName', '$state', '$objFalvor', '$amplitude', '$icon')";
 	// echo $sql . PHP_EOL;
 	if ($conn->query($sql) === TRUE)
 	    echo "New record created successfully" . PHP_EOL;
