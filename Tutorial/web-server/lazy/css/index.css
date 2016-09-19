@@ -1,0 +1,522 @@
+body {
+  padding-top: 170px;
+  padding-bottom: 30px;
+  background: #EBEFF2;
+  position: relative;
+  
+}
+.navbar {
+  height: 100px;
+  background-color: #36404a;
+  border-color: #36404a;
+}
+
+/* -- Object -- */
+
+.object {
+  color: #01c0c8;
+  position: relative;
+  min-height: 145px;
+  max-height: 145px;
+  margin: 10px 0;
+  padding: 20px 0 0 0;
+  background-color: #fff;
+  background-repeat: repeat-x;
+  border: 1px solid #dfe4ed;
+  box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.06), 0 1px 0px 0 rgba(0, 0, 0, 0.02);
+}
+.obj-header {
+  font-size: 14px;
+  color: #98a6ad;
+}
+.obj-info {
+  text-align: right;
+  width: 80%;
+  text-align: left;
+  padding: 0 20px 0px 20px;
+}
+.obj-counter-percent {
+  position: absolute;
+  bottom: 7px;
+}
+.obj-counter-percent .counter{
+  color: inherit;
+  font-size: 14px;
+  font-weight: 300;
+}
+.obj-counter-percent .fa {
+  font-size: 14px;
+  color: #ccc;
+  margin-right: 6px;
+}
+.obj-timer {
+  width: 82px;
+  height: 82px;
+  border: 0;
+  border-radius: 50%;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+.obj-power-consumption {
+  color: #797979;
+  font-weight: 600;
+}
+.obj-power-consumption .fa {
+  margin-right: 5px;
+}
+.obj-off {
+  width: 40px;
+  height: 25px;
+  line-height: 25px;
+  position: absolute;
+  right: 0;
+  top: -25px;
+  background: #ccc;
+  text-align: center;
+  cursor: pointer;
+  visibility: hidden;
+  -webkit-transition: 300ms;
+  -o-transition: 300ms;
+  transition: 300ms;
+}
+.obj-off:hover {
+  background: #e7505a;
+}
+.obj-off .fa {
+  color: #fff;
+  font-size: 17px;
+  line-height: 25px;
+}
+.turn-on .obj-off {
+  visibility: visible;
+}
+/* -- Object slider (obj-button) -- */
+
+.ui-widget-header {
+  border-radius: 0;
+  background-color: #01c0c8;
+}
+.ui-widget.ui-widget-content {
+  width: 100%;
+  height: 6px;
+  border: 0;
+  border-radius: 0;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(120, 130, 140, 0.13);
+  cursor: pointer;
+  outline: none;
+}
+.slider-range-min .ui-slider-handle {
+  border: 0px;
+  height: 20px;
+  width: 14px;
+  top: -0.2em;
+  border-radius: 0 0 3px 3px;
+  background-color: #01c0c8;
+  cursor: pointer;
+  outline: none;
+}
+.slider-range-min .ui-slider-handle::before {
+  content: '';
+  display: block;
+  width: 0; 
+  height: 0; 
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-bottom: 7px solid #01c0c8;
+  position: absolute;
+  top: -7px;
+  left: 0;
+  cursor: pointer;
+}
+
+/* -- Object button (obj-button) -- */
+
+.switch-button {
+    height: 30px;
+    width: 70px;
+    position: absolute;
+    left: 20px;
+    bottom: 20px;
+    border: medium none;
+    border-radius: 9px;
+    background: #ccc;
+    cursor: pointer;
+}
+.switch-button::before {
+  content: "OFF";
+  font-size: 12px;
+  color: #fff;
+  position: absolute;
+  right: 9px;
+  top: 7px;
+  -webkit-transition-duration: 300ms;
+  -o-transition-duration: 300ms;
+  transition-duration: 300ms;
+}
+.switch-button::after {
+  content: " ";
+  width: 29px;
+  height: 25px;
+  position: absolute;
+  left: 2px;
+  top: 2px;
+  z-index: 2;
+  border-radius: 9px;
+  box-shadow: 0 2px 5px #999999;
+  background: #fff none repeat scroll 0 0;
+  -webkit-transition-duration: 300ms;
+  -o-transition-duration: 300ms;
+  transition-duration: 300ms;
+}
+.switch-button.switch-on {
+  background: #01c0c8;
+}
+.switch-button.switch-on::before {
+  content: "ON";
+  right: 42px;
+}
+.switch-button.switch-on::after {
+  left: 37px;
+}
+
+/* -- Object turn (obj-turn) -- */
+
+.obj-turn .switch-button {
+  background: #01c0c8;
+}
+
+/* -- Object-turn + Object-slider -- */
+
+.obj-turn.obj-slider .obj-info .obj-counter-percent {
+  left: 100px;
+  bottom: 15px;
+}
+.obj-turn.obj-slider .switch-button::before {
+  content: "R";
+  right: 15px;
+}
+.obj-turn.obj-slider .switch-button.switch-on::before {
+  content: "L";
+  right: 46px;
+}
+
+/* -- Object-imer -- */
+
+.obj-timer {
+  display: table;
+  cursor: pointer;
+}
+.obj-timer .obj-icon,
+.obj-timer .obj-timer-val {
+  line-height: 35px;
+  color: #ccc;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+.obj-timer .obj-icon {
+  font-size: 50px;
+  -webkit-transition: 300ms;
+  -o-transition: 300ms;
+  transition: 300ms;
+}
+.obj-timer .obj-timer-val {
+  font-size: 20px;
+}
+/*.obj-timer:hover .obj-icon {
+  color: inherit;
+}
+.obj-timer .obj-timer-set {
+  display: none;
+  position: relative;
+}
+.obj-timer-set .obj-timer-val {
+  color: inherit;
+  width: 45px;
+  display: inline-block;
+  font-size: 15px;
+  line-height: 30px;
+  height: 30px;
+  margin-top: 2px;
+  border-width: 0 0 1px 0;
+  border-style: dashed;
+  border-radius: 0;
+  border-bottom-color: transparent;
+  outline: none;
+  background: transparent;
+  pointer-events: none;
+  -webkit-transition: 300ms;
+  -o-transition: 300ms;
+  transition: 300ms;
+  position: relative;
+  z-index: 0;
+}
+.obj-timer-set .obj-timer-val:-moz-placeholder,
+.obj-timer-set .obj-timer-val::-moz-placeholder,
+.obj-timer-set .obj-timer-val:-ms-input-placeholder,
+.obj-timer-set .obj-timer-val::-webkit-input-placeholder,
+.obj-timer-set .obj-timer-val:disabled {
+  opacity: 1;
+}
+.obj-timer-set {
+  width: 94px;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+.obj-timer-set .obj-timer-on,
+.obj-timer-set .obj-timer-edit {
+  display: inline-block;
+  width: 23px;
+  height: 23px;
+  text-align: center;
+  border-radius: 50%;
+  background: #ccc;
+  cursor: pointer;
+  margin-top: 5px
+}
+.obj-timer-set .obj-timer-edit {
+  float: left;
+  margin-left: -8px;
+}
+.obj-timer-set .obj-timer-on {
+  float: right;
+  margin-right: -8px;
+}
+.obj-timer-set .obj-timer-on .fa, .obj-timer-set .obj-timer-edit .fa {
+  color: #fff;
+  line-height: 22px;
+}
+.obj-timer-set.timer-on .obj-timer-on,
+.obj-timer-set.timer-edit .obj-timer-edit {
+  background-color: #01c0c8;
+}
+.obj-timer-set.timer-edit .obj-timer-val,
+.obj-timer-set:hover .obj-timer-val {
+  border-bottom-color: #01c0c8;
+}*/
+
+/* -- Object send (obj-send) -- */
+
+.object.obj-send {
+  min-height: 200px;
+}
+.type-input {
+  margin: 10px 0;
+  height: 30px;
+  min-width: 200px;
+  max-width: 300px;
+  width: 100%;
+  border-bottom: 1px dashed #797979;
+  position: relative;
+}
+.type-input input[type=text] {
+  width: 100%;
+  height: 100%;
+  color: #797979;
+  padding-left: 60px;
+  border-width: 0;
+  border-color: #000;
+  border-radius: 0;
+}
+.type-input input[type=text]:focus {
+  border: none;
+  outline: none;
+}
+.type-input label {
+  color: #797979;
+  margin-bottom: 4px;
+  position: absolute;
+  bottom: 0;
+  left: 1px;
+}
+.object .submit {
+  color: #fff;
+  border: 1px solid #01c0c8;
+  width: 74px;
+  height: 32px;
+  outline: 0;
+  border-radius: 5px;
+  position: absolute;
+  left: 20px;
+  bottom: 20px;
+  background: #01c0c8;
+}
+.submit .fa, .submit span {
+  position: absolute;
+  top: 7px;
+  -webkit-transition: 500ms;
+  -o-transition: 500ms;
+  transition: 500ms;
+}
+.submit .fa {
+  left: 9px;
+}
+.submit span {
+  top: 5px;
+  left: 29px;
+}
+.submit:hover .fa {
+  left: 48px;
+}
+.submit:hover span {
+  left: 9px;
+}
+.obj-timer .timer-progress {
+  transform: rotate(270deg);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.timer-progress circle {
+  stroke: #cccccc;
+  stroke-width: 3px;
+  stroke-dashoffset: 0;
+  fill: transparent;
+  transition: stroke-dashoffset 1s linear;
+  -webkit-transition: stroke-dashoffset 0.6s linear;
+  -o-transition: stroke-dashoffset 0.6s linear;
+  transition: stroke-dashoffset 0.6s linear;
+}
+.timer-progress .progress-bar {
+  stroke: #01c0c8;
+  stroke-dashoffset: 245px;
+}
+
+.log-box {
+  position: fixed;
+  right: 50px;
+  top: 120px;
+  cursor: pointer;
+  z-index: 9999;
+  -webkit-transition: 300ms;
+  -o-transition: 300ms;
+  transition: 300ms;
+  /*display: none;*/
+  opacity: 0;
+  -webkit-transition: 300ms;
+  -o-transition: 300ms;
+  transition: 300ms;
+  -ms-transform: scale(0.5, 0.5);     /* IE 9 */
+  -webkit-transform: scale(0.5, 0.5); /* Safari */
+  transform: scale(0.5, 0.5);
+}
+.log-box.log-show {
+  opacity: 1;
+  -ms-transform: scale(1, 1); /* IE 9 */
+  -webkit-transform: scale(1, 1); /* Safari */
+  transform: scale(1, 1);
+}
+.log-box .log-text {
+  display: inline;
+}
+
+/* -- Object was turned on -- */
+
+.object.turn-on .obj-icon {
+  color: inherit;
+}
+.object.turn-on .obj-counter-percent .fa {
+  color: inherit;
+}
+/*.object.turn-on .obj-timer .obj-timer-set {
+  display: table-cell;
+}
+.object.turn-on .obj-timer .obj-icon {
+  display: none;
+}
+.obj-timer .obj-timer-set.timer-edit .obj-timer-val {
+  pointer-events: all;
+}*/
+
+/* -- Flavor oragne -- */
+
+.object.flavor-orange {
+  color: #fb9678;
+}
+.object.flavor-orange .progress-bar {
+  stroke: #fb9678;
+}
+.object.flavor-orange .obj-timer-set:hover .obj-timer-val,
+.object.flavor-orange .obj-timer-set.timer-edit .obj-timer-val,
+.object.flavor-orange .slider-range-min .ui-slider-handle:before {
+  border-bottom-color: #fb9678;
+}
+.object.obj-turn.flavor-orange .switch-button,
+.object.flavor-orange .switch-button.switch-on,
+.object.flavor-orange .ui-widget-header,
+.object.flavor-orange .slider-range-min .ui-slider-handle,
+.object.flavor-orange .switch-button.switch-on,
+.object.flavor-orange .obj-timer-set.timer-on .obj-timer-on,
+.object.flavor-orange .obj-timer-set.timer-edit .obj-timer-edit {
+  background-color: #fb9678;
+}
+
+/* -- Flavor green -- */
+
+.object.flavor-green {
+  color: #00c292;
+}
+.object.flavor-green .progress-bar {
+  stroke: #00c292;
+}
+.object.flavor-green .obj-timer-set:hover .obj-timer-val,
+.object.flavor-green .obj-timer-set.timer-edit .obj-timer-val,
+.object.flavor-green .slider-range-min .ui-slider-handle:before {
+  border-bottom-color: #00c292;
+}
+.object.obj-turn.flavor-green .switch-button,
+.object.flavor-green .switch-button.switch-on,
+.object.flavor-green .ui-widget-header,
+.object.flavor-green .slider-range-min .ui-slider-handle,
+.object.flavor-green .switch-button.switch-on,
+.object.flavor-green .obj-timer-set.timer-on .obj-timer-on,
+.object.flavor-green .obj-timer-set.timer-edit .obj-timer-edit {
+  background-color: #00c292;
+}
+
+/* -- Flavor violet -- */
+
+.object.flavor-violet {
+  color: #ab8ce4;
+}
+.object.flavor-violet .progress-bar {
+  stroke: #ab8ce4;
+}
+.object.flavor-violet .obj-timer-set:hover .obj-timer-val,
+.object.flavor-violet .obj-timer-set.timer-edit .obj-timer-val,
+.object.flavor-violet .slider-range-min .ui-slider-handle:before {
+  border-bottom-color: #ab8ce4;
+}
+.object.obj-turn.flavor-violet .switch-button,
+.object.flavor-violet .switch-button.switch-on,
+.object.flavor-violet .ui-widget-header,
+.object.flavor-violet .slider-range-min .ui-slider-handle,
+.object.flavor-violet .switch-button.switch-on,
+.object.flavor-violet .obj-timer-set.timer-on .obj-timer-on,
+.object.flavor-violet .obj-timer-set.timer-edit .obj-timer-edit {
+  background-color: #ab8ce4;
+}
+
+
+.touch-device .obj-timer:hover .obj-icon {
+  color: #ccc;
+}
+.touch-device .turn-on .obj-timer:hover .obj-icon {
+  color: inherit;
+}
+/* -- Responsive -- */
+
+@media (max-width: 567px) {
+  .col-xs-6 {
+    width: 100%;
+
+  }
+  
+}

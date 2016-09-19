@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Lazy man</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans">
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="jquery/jquery-ui.min.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    
+    <!-- JS -->
+    <script type="text/javascript" src="jquery/jquery.js"></script>
+    <script type="text/javascript" src="jquery/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/jquery.ui.touch-punch.min.js"></script>
+    <script type="text/javascript" src="js/query.js"></script>
+    
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body class="lazy-man">
+    <!-- Fixed navbar -->
+    <div class="container"></div>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+        </div>
+      </div>
+    </nav>
+    <!-- Conainer -->
+    <div class="container">
+
+      <div class="row">
+        <div class="land-1">
+
+          <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
+            <div class="object obj-slider objName-living-room-light">
+              <div class="obj-info">  
+                <p class="obj-header">Living Room Light</p>
+                <p class="obj-power-consumption"><i class="fa fa-plug"></i><span class="power-conspt-value">2</span> Kwh</p>
+                <p class="obj-counter-percent"><i class="fa fa-lightbulb-o"></i><b class="counter">40</b></p>
+              </div>
+              <div class="obj-timer">
+                <svg class="timer-progress" viewbox="0 0 82 82">
+                  <circle class="progress-bg" r="39" cx="41" cy="41" stroke-dasharray="245"></circle>
+                  <circle class="progress-bar" r="39" cx="41" cy="41" stroke-dasharray="245"></circle>
+                </svg>
+                <i class="obj-icon fa fa-lightbulb-o"></i>
+                <div class="obj-timer-set">
+                  <span class="obj-timer-edit">
+                    <i class="fa fa-clock-o" aria-hidden="true"></i>
+                  </span>
+                  <input class="obj-timer-val" type="text" value="0h">
+                  <span class="obj-timer-on">
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                  </span>
+                </div>
+              </div>
+              <div class="slider-range-min"></div>
+              <div class="obj-off"><i class="fa fa-close"></i></div>
+              <div class="clearfix"></div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
+            <div class="object obj-slider flavor-orange">
+              <div class="obj-info">
+                <p class="obj-header">Bed Room Light</p>
+                <p class="obj-power-consumption"><i class="fa fa-plug"></i><span class="power-conspt-value">2</span> Kwh</p>
+                <p class="obj-counter-percent"><i class="fa fa-lightbulb-o"></i><b class="counter">80</b></p>
+              </div>
+              <div class="obj-timer">
+                <svg class="timer-progress" viewbox="0 0 82 82">
+                  <circle class="progress-bg" r="39" cx="41" cy="41" stroke-dasharray="245"></circle>
+                  <circle class="progress-bar" r="39" cx="41" cy="41" stroke-dasharray="245"></circle>
+                </svg>
+                <i class="obj-icon fa fa-lightbulb-o"></i>
+                <div class="obj-timer-set">
+                  <span class="obj-timer-edit">
+                    <i class="fa fa-clock-o" aria-hidden="true"></i>
+                  </span>
+                  <input class="obj-timer-val" type="text" value="0h">
+                  <span class="obj-timer-on">
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                  </span>
+                </div>
+              </div>
+              <div class="slider-range-min"></div>
+              <div class="obj-off"><i class="fa fa-close"></i></div>
+              <div class="clearfix"></div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
+            <div class="object obj-slider flavor-green">
+              <div class="obj-info">
+                <p class="obj-header">Porch Light</p>
+                <p class="obj-power-consumption"><i class="fa fa-plug"></i><span class="power-conspt-value">2</span> Kwh</p>
+                <p class="obj-counter-percent"><i class="fa fa-lightbulb-o"></i><b class="counter">60</b></p>
+              </div>
+              <div class="obj-timer">
+                <svg class="timer-progress" viewbox="0 0 82 82">
+                  <circle class="progress-bg" r="39" cx="41" cy="41" stroke-dasharray="245"></circle>
+                  <circle class="progress-bar" r="39" cx="41" cy="41" stroke-dasharray="245"></circle>
+                </svg>
+                <i class="obj-icon fa fa-lightbulb-o"></i>
+                <div class="obj-timer-set">
+                  <span class="obj-timer-edit">
+                    <i class="fa fa-clock-o" aria-hidden="true"></i>
+                  </span>
+                  <input class="obj-timer-val" type="text" value="0h">
+                  <span class="obj-timer-on">
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                  </span>
+                </div>
+              </div>
+              <div class="slider-range-min"></div>
+              <div class="obj-off"><i class="fa fa-close"></i></div>
+              <div class="clearfix"></div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
+            <div class="object obj-slider flavor-violet">
+              <div class="obj-info">
+                <p class="obj-header">Porch Light</p>
+                <p class="obj-power-consumption"><i class="fa fa-plug"></i><span class="power-conspt-value">2</span> Kwh</p>
+                <p class="obj-counter-percent"><i class="fa fa-lightbulb-o"></i><b class="counter">100</b>
+              </div>
+              <div class="obj-timer">
+                <svg class="timer-progress" viewbox="0 0 82 82">
+                  <circle class="progress-bg" r="39" cx="41" cy="41" stroke-dasharray="245"></circle>
+                  <circle class="progress-bar" r="39" cx="41" cy="41" stroke-dasharray="245"></circle>
+                </svg>
+                <i class="obj-icon fa fa-lightbulb-o"></i>
+                <div class="obj-timer-set">
+                  <span class="obj-timer-edit">
+                    <i class="fa fa-clock-o" aria-hidden="true"></i>
+                  </span>
+                  <input class="obj-timer-val" type="text" value="0h">
+                  <span class="obj-timer-on">
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                  </span>
+                </div>
+              </div>
+              <div class="slider-range-min"></div>
+              <div class="obj-off"><i class="fa fa-close"></i></div>
+              <div class="clearfix"></div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
+            <div class="object obj-button flavor-green">
+              <div class="obj-info">
+                <p class="obj-header">Toilet Light</p>
+                <p class="obj-power-consumption"><i class="fa fa-plug"></i><span class="power-conspt-value">2</span> Kwh</p>
+              </div>
+              <div class="obj-timer">
+                <svg class="timer-progress" viewbox="0 0 82 82">
+                  <circle class="progress-bg" r="39" cx="41" cy="41" stroke-dasharray="245"></circle>
+                  <circle class="progress-bar" r="39" cx="41" cy="41" stroke-dasharray="245"></circle>
+                </svg>
+                <i class="obj-icon fa fa-lightbulb-o"></i>
+                <div class="obj-timer-set">
+                  <span class="obj-timer-edit">
+                    <i class="fa fa-clock-o" aria-hidden="true"></i>
+                  </span>
+                  <input class="obj-timer-val" type="text" value="0h">
+                  <span class="obj-timer-on">
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                  </span>
+                </div>
+              </div>
+              <div class="switch-button"></div>
+              <div class="clearfix"></div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
+            <div class="object obj-button flavor-violet door-lock">
+              <div class="obj-info">
+                <p class="obj-header">Front Door</p>
+              </div>
+              <div class="obj-timer">
+                <svg class="timer-progress" viewbox="0 0 82 82">
+                  <circle class="progress-bg" r="39" cx="41" cy="41" stroke-dasharray="245"></circle>
+                  <circle class="progress-bar" r="39" cx="41" cy="41" stroke-dasharray="245"></circle>
+                </svg>
+                <i class="obj-icon fa fa-lock"></i>
+                <div class="obj-timer-set">
+                  <span class="obj-timer-edit">
+                    <i class="fa fa-clock-o" aria-hidden="true"></i>
+                  </span>
+                  <input class="obj-timer-val" type="text" value="0h">
+                  <span class="obj-timer-on">
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                  </span>
+                </div>
+              </div>
+              <div class="switch-button"></div>
+              <div class="clearfix"></div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
+            <div class="object obj-turn obj-slider dc-motor">
+              <div class="obj-info">
+                <p class="obj-header">DC Motor</p>
+                <p class="obj-power-consumption"><i class="fa fa-plug"></i><span class="power-conspt-value">2</span> Kwh</p>
+                <p class="obj-counter-percent"><i class="fa fa-gears"></i><b class="counter">40</b></p>
+              </div>
+              <div class="obj-timer">
+                <svg class="timer-progress" viewbox="0 0 82 82">
+                  <circle class="progress-bg" r="39" cx="41" cy="41" stroke-dasharray="245"></circle>
+                  <circle class="progress-bar" r="39" cx="41" cy="41" stroke-dasharray="245"></circle>
+                </svg>
+                <i class="obj-icon fa fa-gears"></i>
+                <div class="obj-timer-set">
+                  <span class="obj-timer-edit">
+                    <i class="fa fa-clock-o" aria-hidden="true"></i>
+                  </span>
+                  <input class="obj-timer-val" type="text" value="0h">
+                  <span class="obj-timer-on">
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                  </span>
+                </div>
+              </div>
+              <div class="switch-button type-turn"></div>
+              <div class="slider-range-min"></div>
+              <div class="obj-off"><i class="fa fa-close"></i></div>
+              <div class="clearfix"></div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
+            <div class="object obj-button flavor-orange alarm">
+              <div class="obj-info">
+                <p class="obj-header">Alarm</p>
+              </div>
+              <div class="obj-timer">
+                <svg class="timer-progress" viewbox="0 0 82 82">
+                  <circle class="progress-bg" r="39" cx="41" cy="41" stroke-dasharray="245"></circle>
+                  <circle class="progress-bar" r="39" cx="41" cy="41" stroke-dasharray="245"></circle>
+                </svg>
+                <i class="obj-icon fa fa-bell-o"></i>
+                <div class="obj-timer-set">
+                  <span class="obj-timer-edit">
+                    <i class="fa fa-clock-o" aria-hidden="true"></i>
+                  </span>
+                  <input class="obj-timer-val" type="text" value="0h">
+                  <span class="obj-timer-on">
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                  </span>
+                </div>
+              </div>
+              <div class="switch-button"></div>
+              <div class="clearfix"></div>
+            </div>
+          </div>
+          
+          <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">
+            <div class="object obj-button obj-send send">
+              <div class="obj-info">
+                <p class="obj-header">Send To</p>
+                <div class="send-name type-input">
+                  <label for="name">Name : </label>
+                  <input type="text" name="name" id="name">
+                </div>
+                <div class="send-value type-input">
+                  <label for="value">Value : </label>
+                  <input type="text" name="value" id="value">
+                </div>
+              </div>
+              <button class="submit submit-button" type="button"><i class="obj-icon fa fa-send"></i><span>Send</span></button>
+              <div class="obj-off"><i class="fa fa-close"></i></div>
+              <div class="clearfix"></div>
+            </div>
+          </div>
+          <div class="clearfix"></div>  
+        </div>
+      </div>
+    <p class="load-ajax"></p>
+    </div>
+  </body>
+</html>
