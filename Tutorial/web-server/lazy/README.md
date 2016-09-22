@@ -9,7 +9,6 @@ Chương trình điều khiển các thiết bị đơn giản từ xa bằng Ra
 Cài đặt Apache, PHP và mysql trên Raspberry Pi.
 
 ## Sử dụng
-=================================
 
 Tải chương trình xuống và bỏ vào thư mục /var/www/html. Có thể sử dụng git command
 
@@ -48,8 +47,24 @@ Chạy chương trình master trên terminal :
 
 
 ## Các hàm chức năng
-====================
 
+Tạo một thiết bị điều khiển mới :
+
+```objc
+InsertObject($conn,object-type,object-name,initial-state,color,amplitude,icon)
+```
+Trong đó :
+-	$conn : là biến liên kết tới mysql
+-	object-type : loại thiết bị, loại thiết bị khác nhau có cách điều khiển khác 
+nhau. Hỗ trợ 2 lọai là "obj-slider" và "obj-button"
+-	object-name : tên thiết bị điều khiển.
+-	initial-state : trạng thái thiết lập. 1 tương ứng với bật và 0 tương ứng với
+tắt.
+-	color : màu sắc cho giao diện điều khiển. Có 4 màu là blue (mặc định : NULL),
+green (flavor-green), orange (flavor-orange), violet (flavor-violet).
+-	amplitude : Mức hoạt động của thiết bị. Ví dụ như đèn sẽ sáng bao nhiều % so
+với định mức.
+-	icon : icon đại diện cho thiết bị. Mặc định là "fa-wrench". Xem tên các icon ở đây [font-awsome](http://fontawesome.io/icons/)
 
 
 
