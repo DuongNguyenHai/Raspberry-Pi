@@ -2,7 +2,7 @@
 
 define("serverName", "localhost");
 define("userName", "root");
-define("password", "nightsky");
+define("password", "password");
 define("dbName", "home");
 define("TABLE", " device "); // need space between 'device'
 
