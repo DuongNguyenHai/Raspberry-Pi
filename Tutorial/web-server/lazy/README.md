@@ -7,7 +7,8 @@ giao diện điều khiển web.
 
 ### Yêu cầu
 
-Cài đặt Apache, PHP và mysql trên Raspberry Pi.
+Cài đặt Apache, PHP và mysql trên Raspberry Pi. Có thể xem hướng dẫn ở đây
+[Cài đặt](http://smart-techvn.com/bai-viet-ki-thuat/raspberry-pi/24025-bai-10-lap-trinh-web-server-tren-raspberry-pi-%E2%80%93-phan-1.html)
 
 ## Tính năng
 
