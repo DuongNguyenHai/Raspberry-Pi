@@ -5,7 +5,7 @@
 <?php 
 
 include 'function/print-HTML.php';
-include 'function/sql-function.php';
+include 'sql/sql-function.php';
 
 $conn = ConnectDatabse();
 
