@@ -10,7 +10,7 @@ giao diện điều khiển web.
 Cài đặt Apache, PHP và mysql trên Raspberry Pi. Có thể xem hướng dẫn ở đây
 [Cài đặt](http://smart-techvn.com/bai-viet-ki-thuat/raspberry-pi/24025-bai-10-lap-trinh-web-server-tren-raspberry-pi-%E2%80%93-phan-1.html)
 
-## Tính năng
+### Tính năng
 
 Mô hình có dạng tương tác như sau :
 
@@ -32,7 +32,7 @@ người dùng sẽ phải tự quyết định làm gì với dữ liệu đó.
 Khi cài đặt xong chương trình sẽ có sẵn giao diện điều khiển cho một vài thiêt
 bị đơn giản như đèn điên, cửa ra vào. 
 
-## Cài đặt và sử dụng
+### Cài đặt và sử dụng
 
 Tải chương trình xuống và bỏ vào thư mục /var/www/html. Có thể sử dụng git command
 
@@ -69,7 +69,7 @@ Chạy chương trình master trên terminal :
 
 	$ ./server-thread
 
-## Các hàm chức năng
+### Các hàm chức năng
 
 Tạo một thiết bị điều khiển mới :
 
