@@ -7,8 +7,8 @@ giao diện điều khiển web.
 
 ### Yêu cầu
 
-Cài đặt Apache, PHP và mysql trên Raspberry Pi. Có thể xem hướng dẫn ở đây
-[Cài đặt](http://smart-techvn.com/bai-viet-ki-thuat/raspberry-pi/24025-bai-10-lap-trinh-web-server-tren-raspberry-pi-%E2%80%93-phan-1.html)
+Cài đặt Apache, PHP và mysql trên Raspberry Pi. Có thể xem hướng dẫn [ở đây]
+(http://smart-techvn.com/bai-viet-ki-thuat/raspberry-pi/24025-bai-10-lap-trinh-web-server-tren-raspberry-pi-%E2%80%93-phan-1.html)
 
 ### Tính năng
 
@@ -71,6 +71,10 @@ Chạy chương trình master trên terminal :
 
 ### Các hàm chức năng
 
+Cách hàm chức năng viết trong file "sql-function.php" và được sử dụng trong file
+"sql.php". Mục đích để xử lý cơ sở dữ liệu trên mysql. Bao gồm thêm vào, xóa, cập nhật
+thiêt bị vào cơ sở dữ liệu.
+
 Tạo một thiết bị điều khiển mới :
 
 ```objc
@@ -118,4 +122,8 @@ Trong đó :
 -	name (string) : tên thuộc tính muốn thay đổi
 -	value : giá trị muốn thay đổi.
 
+Để thực thi file "sql.php". Gõ lệnh :
 
+	$ php sql.php
+
+Có thể xem bài hướng dẫn chi tiết ở [web-server]()
