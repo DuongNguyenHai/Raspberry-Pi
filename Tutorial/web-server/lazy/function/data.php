@@ -4,7 +4,6 @@
 	include '../sql/sql-function.php';
 	
 	$conn = ConnectDatabse();	// connect to database
-	
 
 	if( $_REQUEST["type"] ) {
 

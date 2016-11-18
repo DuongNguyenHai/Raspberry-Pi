@@ -2,7 +2,7 @@
 
 define("serverName", "localhost");
 define("userName", "root");
-define("password", "password");
+define("password", "nightsky");
 define("dbName", "home");
 define("TABLE", " device "); // need space between 'device'
 
@@ -10,8 +10,8 @@ function ConnectToSql() {
 	$conn = mysqli_connect(serverName, userName, password);
 	if (!$conn)
 	    die("Connection failed: " . mysqli_connect_error()) . PHP_EOL;
-	else
-		echo "Connection to mysql success !" . PHP_EOL;
+	else;
+		// echo "Connection to mysql success !" . PHP_EOL;
 
 	return $conn;
 }

@@ -13,8 +13,6 @@
 #define BUFFSIZE 256
 #define PORT 8888
 
-// Function : handle client
-void *HandleThreadClient(void *socket_desc);
 
 // Function : creat tco server socket
 int CreateTCPServerSocket(unsigned short port);
@@ -23,8 +21,7 @@ int CreateTCPServerSocket(unsigned short port);
 // Return server socket
 int AcceptTCPConnection(int servSock);
 
-// Function : TCP client handling
-void HandleForkClient(int clntSocket);
+
 
 // Show error message
 void error(const char *msg);

@@ -18,7 +18,12 @@ int CreateTCPServerSocket(unsigned short port){
     /* Create socket for incoming connections */
     if ((servSock = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP)) < 0)
         error("ERROR opening socket");
-      
+    
+    int reuse=1;
+    if (setsockopt(servSock, SOL_SOCKET, SO_REUSEADDR, (char *)&reuse, sizeof(int)) == -1){
+        printf("Reuse port Error : \n");
+    }
+
     /* Construct local address structure */
     memset(&serv_addr, 0, sizeof(serv_addr));   /* Zero out structure */
     serv_addr.sin_family = AF_INET;                /* Internet address family */
@@ -53,49 +58,4 @@ int AcceptTCPConnection(int servSock){
     
 
     return clntSock;
-}
-
-void *HandleThreadClient(void *threadArgs){
-    int clntSock;
-    int recvMsgSize;
-    char buffer[BUFFSIZE];
-    bzero(buffer,BUFFSIZE);
-
-    clntSock = ((struct ThreadArgs *) threadArgs) -> clntSock;
-    
-    while(1){
-        recvMsgSize = recv(clntSock,buffer,BUFFSIZE,0);
-        if (recvMsgSize < 0) 
-            error("ERROR reading from socket");
-        else if(recvMsgSize>0){
-            printf(". Address[%s]: %s\n", ((struct ThreadArgs *) threadArgs) -> addr,buffer);
-            bzero(buffer,strlen(buffer));
-        }
-        else{
-            printf("- Address[%s]: disconnected !\n", ((struct ThreadArgs *) threadArgs) -> addr);
-            break;
-        }     
-    }
-    close(clntSock);
-}
-
-void HandleForkClient(int clntSock){
-	int recvMsgSize;                    /* Size of received message */
-    char buffer[BUFFSIZE];
-    bzero(buffer,BUFFSIZE);
-    
-    // while(1){
-        recvMsgSize = recv(clntSock,buffer,BUFFSIZE,0);
-        if (recvMsgSize < 0) 
-            error("ERROR reading from socket");
-        else if(recvMsgSize>0){
-            printf(". Client[%d]: %s\n",clntSock,buffer);
-            bzero(buffer,strlen(buffer));
-        }
-        else{
-            printf("- Client[%d]: disconnected !\n",clntSock);
-            // break;
-        }     
-    // }
-    // close(clntSock);
 }
