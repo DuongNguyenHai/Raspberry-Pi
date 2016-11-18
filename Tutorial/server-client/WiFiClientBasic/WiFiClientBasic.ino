@@ -6,14 +6,14 @@
 ESP8266WiFiMulti WiFiMulti;
 
 const uint16_t port = 8888;         // port open of server in raspberry
-const char * host = "192.168.1.23"; // ip or dns of raspberry
+const char * host = "192.168.100.27"; // ip or dns of raspberry
     
 void setup() {
     Serial.begin(115200);
     delay(10);
 
     // We start by connecting to a WiFi network
-    WiFiMulti.addAP("My home", "sodienthoaicuatao");
+    WiFiMulti.addAP("SongHe", "nuocchaydamdam");
 
     Serial.println();
     Serial.println();
@@ -31,7 +31,6 @@ void setup() {
 
     delay(500);
 }
-
 
 void loop() {
     
@@ -54,7 +53,7 @@ void loop() {
         
         // This will send the request to the server
         client.print(str);
-        // gửi cái này lên seril
+        // gửi cái này lên serial
         Serial.print("message: ");
         Serial.println(str);
       }
