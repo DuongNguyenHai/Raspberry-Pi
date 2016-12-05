@@ -75,19 +75,18 @@ bool SentID() {
     while(1) {
         printf("Send identify : \"Living Room Light : L1\"\n");
         SendToMaster(IdDevice);
-        // while(1){
-            recvMsgSize = recv(sockfd,buffer,BUFFSIZE,0);
-            if (recvMsgSize < 0) {
-                printf("ERROR reading from socket\n");
+        
+        recvMsgSize = recv(sockfd,buffer,BUFFSIZE,0);
+        if (recvMsgSize < 0) {
+            printf("ERROR reading from socket\n");
+        }
+        else if(recvMsgSize>0) {
+            if(strcmp(buffer, SET)==0) {
+                printf("the device was set: %s\n", buffer);
+                bzero(buffer,BUFFSIZE);
+                return true;
             }
-            else if(recvMsgSize>0) {
-                if(strcmp(buffer, SET)==0) {
-                    printf("the device was set: %s\n", buffer);
-                    bzero(buffer,BUFFSIZE);
-                    return true;
-                }
-            }
-        // }
+        }
         sleep(1);
     }
     return false;
