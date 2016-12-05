@@ -2,9 +2,10 @@
     Nguyen Hai Duong
     Date : 11 jun 2016
 
-    compile : gcc -Wall -g server-thread.c -o server-thread -lpthread
+    compile : gcc -std=c11 -Wall -g -D_BSD_SOURCE server-thread.c -o server-thread -lpthread
 */
 #include <string.h>
+#include <strings.h>
 #include "TCP-IP.h"
 #include "TCP-IP.c"
 #include <stdbool.h>    // for bool type
@@ -124,7 +125,7 @@ void ServerCommand(char *str) {
                     SendCommandToDevice(i, content);
                 else
                     printf("- There is no device: \"%s\"\n", IdDevice[i][0]);
-                break;
+                // break;       // break when u just wanna send to one device
             }
     }
 }
