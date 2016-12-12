@@ -6,11 +6,14 @@
 ESP8266WiFiMulti WiFiMulti;
 // Use WiFiClient class to create TCP connections
 WiFiClient client;
+#define ssid "******"  // network name
+#define password "******" // password
+#define host "192.168.0.101" // ip address of raspberry
+#define port 8888         // port open of server in raspberry
 #define LIGHT_PIN 4
-const uint16_t port = 8880;         // port open of server in raspberry
-const char * host = "192.168.13.13"; // ip or dns of raspberry
 #define DEVICE_NAME "Toilet Light"
 #define IdDevice "L2"
+#define INIT_IdDevice "INIT:"IdDevice
 
 bool SentID();
 bool Switch(bool set);
@@ -20,7 +23,7 @@ void setup() {
     delay(10);
 
     // We start by connecting to a WiFi network
-    WiFiMulti.addAP("AquaOs", "ketvanbon");
+    WiFiMulti.addAP(ssid, password);
 
     Serial.println();
     Serial.println();
@@ -41,10 +44,10 @@ void setup() {
 }
 
 void loop() {
-    
+
     Serial.print("connecting to ");
     Serial.println(host);
-    
+
 
     if (!client.connect(host, port)) {
         Serial.println("connection failed");
@@ -65,17 +68,17 @@ void loop() {
               Switch(true);
             else if(line.equals("state=0"))
               Switch(false);
-        }  
+        }
     }
 
     client.stop();
-    
+
 }
 
 bool SentID() {
   Serial.print("Send identify: "); Serial.println(DEVICE_NAME);
-  client.print(IdDevice);
-  delay(1000);
+  client.print(INIT_IdDevice);
+  delay(500);
   while(client.available()) {
       String line = client.readStringUntil('\r');
       if(line.equals("OK")) {
@@ -93,4 +96,3 @@ bool Switch(bool set) {
   digitalWrite(LIGHT_PIN, set);
   return true;
 }
-
