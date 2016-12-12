@@ -25,7 +25,6 @@
 			$str = $_REQUEST["state"];
 			SendCommandToMaster($str);
 		}
-		
 	}
 	
 	CloseDatabase($conn);

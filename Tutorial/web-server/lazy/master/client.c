@@ -1,5 +1,7 @@
 // Nguyen Hai Duong
 // simple client
+// notice that client has the same ip with server. so its correspond to web-server.
+// To test it lets change 
 
 #include <stdio.h>      /* for printf() and fprintf() */
 #include <sys/socket.h> /* for socket(), connect(), send(), and recv() */
@@ -14,7 +16,8 @@
 
 #define DEVICE_NAME "Living Room Light"
 #define IdDevice "L1"
-#define SET "SET"
+#define INIT_IdDevice "INIT:"IdDevice
+#define SET "OK"
 
 int sockfd;
 int recvMsgSize;
@@ -31,7 +34,7 @@ bool SentID();
 int main(int argc, char *argv[]){
 
     struct sockaddr_in serv_addr;
-    
+
     char *servIP;
     if (argc < 2)
     {
@@ -55,9 +58,10 @@ int main(int argc, char *argv[]){
 
     SentID();
 
-    while(1){
+    while(1) {
+        
         recvMsgSize = recv(sockfd,buffer,BUFFSIZE,0);
-        if (recvMsgSize < 0) {
+        if (recvMsgSize==-1) {
             printf("ERROR reading from socket\n");
         }
         else if(recvMsgSize>0) {
@@ -71,29 +75,28 @@ int main(int argc, char *argv[]){
 }
 
 bool SentID() {
+    printf("Send identify : \"Living Room Light : L1\"\n");
+    SendToMaster(INIT_IdDevice);
 
-    while(1) {
-        printf("Send identify : \"Living Room Light : L1\"\n");
-        SendToMaster(IdDevice);
-        // while(1){
-            recvMsgSize = recv(sockfd,buffer,BUFFSIZE,0);
-            if (recvMsgSize < 0) {
-                printf("ERROR reading from socket\n");
-            }
-            else if(recvMsgSize>0) {
-                if(strcmp(buffer, SET)==0) {
-                    printf("the device was set: %s\n", buffer);
-                    bzero(buffer,BUFFSIZE);
-                    return true;
-                }
-            }
-        // }
-        sleep(1);
+    bzero(buffer,BUFFSIZE);
+    recvMsgSize = recv(sockfd,buffer,BUFFSIZE,0);
+    if (recvMsgSize ==-1) {
+        printf("ERROR reading from socket\n");
     }
+    else if(recvMsgSize>0) {
+        if(strcmp(buffer, SET)==0) {
+            printf("the device was set: %s\n", buffer);
+            return true;
+        }
+    } else {
+        // something wrong
+    }
+    sleep(0.5);
     return false;
 }
 
 bool SendToMaster(char *str) {
+
     if ( send(sockfd, str, strlen(str),0) < 0) {
         printf("Error seding to master\n");
         return false;

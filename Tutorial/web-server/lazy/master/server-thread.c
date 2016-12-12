@@ -2,9 +2,10 @@
     Nguyen Hai Duong
     Date : 11 jun 2016
 
-    compile : gcc -Wall -g server-thread.c -o server-thread -lpthread
+    compile : gcc -std=c11 -Wall -g -D_BSD_SOURCE server-thread.c -o server-thread -lpthread
 */
 #include <string.h>
+#include <strings.h>
 #include "TCP-IP.h"
 #include "TCP-IP.c"
 #include <stdbool.h>    // for bool type
@@ -85,13 +86,17 @@ void *HandleThreadClient(void *threadArgs){
                 printf(". Web server: %s\n", buffer);
                 ServerCommand(buffer);
             }else {
+                printf(". Device: %s\n", buffer);
                 // Check command of device
-                // result command
-                if(strcmp(buffer,"RESULT")==0) {
+                char *header = strtok(buffer, ":");
+    			char *content = strtok(NULL, ":");
+                if(strcmp(header,"RESULT")==0) { // result command
                     // response from device
-                    printf(". Address[%s]: %s\n", ((struct ThreadArgs *) threadArgs) -> addr, buffer);
-                } else {    // set a new device command
-                    IdentifyDevice(clntSock ,buffer);
+                    printf(". Address[%s]: %s\n", ((struct ThreadArgs *) threadArgs) -> addr, content);
+                } else if (strcmp(header,"INIT")==0) {    // Init a new device command
+                    IdentifyDevice(clntSock, content);
+                } else {
+                    // other command
                 }
             }
             bzero(buffer,strlen(buffer));
@@ -124,7 +129,7 @@ void ServerCommand(char *str) {
                     SendCommandToDevice(i, content);
                 else
                     printf("- There is no device: \"%s\"\n", IdDevice[i][0]);
-                break;
+                // break;       // break when u just wanna send to one device
             }
     }
 }
@@ -134,12 +139,11 @@ bool IdentifyDevice(int clntSock, char *str) {
     for (int i = 0; i < SIZE_OF_ARRY2(IdDevice); ++i) { 
         if(IdDevice[i][0]) // check if IdDevice[i][0] is not NULL
             if(strcmp(str, IdDevice[i][1])==0) {
-                printf("\n+ Detecting a new client !\n");
-                printf(". Device: %s, ID: %s\n\n", IdDevice[i][0], IdDevice[i][1]);
-                if ( send(clntSock, SET,strlen(SET),0) < 0) {
-                    printf("- Setting device: \"%s\" false\n", IdDevice[i][0]);
+                printf("+ Detecting a new device: %s, ID:%s\n\n", IdDevice[i][0], IdDevice[i][1]);
+                if ( send(clntSock, SET,strlen(SET),0) < 0) { // send "OK"
+                    printf("- Sending \"OK\" to device: \"%s\" false\n", IdDevice[i][0]);
                     return false;
-                } 
+                }
                 char clientAddr[4]; // save client socket as string, max is "9999"
                 sprintf(clientAddr, "%d", clntSock);    // convert to string
                 IdDevice[i][2] = strdup(clientAddr);    // save to IdDevice
