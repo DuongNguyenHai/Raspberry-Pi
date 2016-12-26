@@ -10,7 +10,7 @@ int main(){
 	char c;
 	printf("Raspberry's receiving : \n");
 	
-	while(1){
+	while(1) {
 		if((fd = serialOpen ("/dev/ttyUSB0", 9600)) < 0 ){
 			fprintf (stderr, "Unable to open serial device: %s\n", strerror (errno)) ;
 		}else{

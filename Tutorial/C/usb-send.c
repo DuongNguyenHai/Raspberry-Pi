@@ -5,7 +5,7 @@
 #include <wiringPi.h>
 #include <wiringSerial.h>
 
-int main(){
+int main() {
 	int fd ;
 	int counter=0;
 	char c[10];
