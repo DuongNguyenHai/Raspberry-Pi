@@ -1,3 +1,5 @@
+// Compile : gcc -Wall uart-send.c -o uart-send -lwiringPi
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -6,21 +8,19 @@
 #include <wiringSerial.h>
 
 int main() {
-	int fd ;
-	int counter=0;
-	char c[10];
+
+	int fd;
+
 	printf("Raspberry's sending : \n");
 	
-	while(1){
+	while(1) {
 		if((fd = serialOpen ("/dev/ttyAMA0", 9600)) < 0 ){
-			fprintf (stderr, "Unable to open serial device: %s\n", strerror (errno)) ;
+			fprintf (stderr, "Unable to open serial device: %s\n", strerror (errno));
 		}
-		serialPutchar(fd,counter);
-		printf("%d",counter);
+		serialPuts(fd, "hello");
+		serialFlush(fd);
+		printf("%s\n", "hello");
 		fflush(stdout);
-		counter++;
-		if(counter>10)
-			counter=0;
 		delay(1000);
 	}
 	return 0;

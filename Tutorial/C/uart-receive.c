@@ -1,3 +1,5 @@
+// Compile : gcc -Wall uart-receive.c -o uart-receive -lwiringPi
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -5,8 +7,9 @@
 #include <wiringPi.h>
 #include <wiringSerial.h>
 
-int main(){
-	int fd ;
+int main() {
+	
+	int fd;
 	char c;
 	printf("Raspberry's receiving : \n");
 	

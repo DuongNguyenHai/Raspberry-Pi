@@ -8,9 +8,9 @@ int main(void)
     while(1)
     {
         digitalWrite(17, HIGH); 
-        delay(1000);
+        delay(1000);            // delay 1000 ms
         digitalWrite(17, LOW);
-        delay(1000);
+        delay(1000);            // delay 1000 ms
     }
     return 0;
 }

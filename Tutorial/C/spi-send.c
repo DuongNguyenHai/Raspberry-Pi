@@ -1,3 +1,5 @@
+// gcc -Wall spi-send.c -o spi-send -lwiringPi
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -10,7 +12,7 @@
 #define speed 500000
 #define	SS0	8
 
-int main(){
+int main() {
 	unsigned char buff[4] = "abc\n";
 	pinMode(SS0, OUTPUT);
 	digitalWrite(SS0, 1);

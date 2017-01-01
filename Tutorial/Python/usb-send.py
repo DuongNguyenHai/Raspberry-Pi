@@ -12,6 +12,8 @@ ser = serial.Serial(
 	timeout=1
 )
 
+ser.isOpen()
+
 counter=0
 
 print("Raspberry's sending : ")

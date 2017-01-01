@@ -11,8 +11,8 @@ int main(){
 	int fd = wiringPiI2CSetup(addrSlave);
 	
 	while(1){
-		int f = wiringPiI2CWrite(fd,val);
-		printf("%d",f);
+		int f = wiringPiI2CWrite(fd, val);
+		printf("%d", f);
 		fflush(stdout);
 		delay(1000);
 	}
