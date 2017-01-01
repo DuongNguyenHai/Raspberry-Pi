@@ -12,12 +12,13 @@ ser = serial.Serial(
 	timeout=1
 )
 
+ser.isOpen()
+
 counter=0
 
 print("Raspberry's sending : ")
 
 try:
-	# ham code chinh o day
     while True:
         ser.write(str(counter).encode())
         print(counter,end="")

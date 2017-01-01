@@ -1,3 +1,5 @@
+// Compile : gcc -Wall usb-receive.c -o usb-receive -lwiringPi
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -5,12 +7,13 @@
 #include <wiringPi.h>
 #include <wiringSerial.h>
 
-int main(){
-	int fd ;
+int main() {
+	
+	int fd;
 	char c;
 	printf("Raspberry's receiving : \n");
 	
-	while(1){
+	while(1) {
 		if((fd = serialOpen ("/dev/ttyUSB0", 9600)) < 0 ){
 			fprintf (stderr, "Unable to open serial device: %s\n", strerror (errno)) ;
 		}else{
