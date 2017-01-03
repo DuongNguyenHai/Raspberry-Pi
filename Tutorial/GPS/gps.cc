@@ -6,8 +6,8 @@
 
 #include <stdio.h>
 #include <iostream>
-#include <string>
 #include <errno.h>      // perror function to print errno message
+#include <string>
 #include <sys/socket.h> /* for socket(), connect(), send(), and recv() */
 #include <arpa/inet.h>  /* for sockaddr_in and inet_addr() */
 #include <stdlib.h>     /* for atoi() and exit() */
@@ -18,8 +18,7 @@
 
 using namespace std;
 
-#define GMT 7
-#define GOOGLE_IP "172.217.4.170"
+#define GOOGLE_MAP_IP "172.217.4.170"
 #define BUFFSIZE 1024
 #define PORT 80
 
@@ -58,14 +57,14 @@ struct type_location {
 } position;
 
 string GetMessage();
-int ClassifyRespond(string str);             // classify type of message responded from GPS device
-int HandleGPRMC(string str);                 // handle with GPRMC message
-int GetDateTime(string time, string date);   // get date and time from message
+int ClassifyRespond(string str);                // classify type of message responded from GPS device
+int HandleGPRMC(string str);                    // handle with GPRMC message
+int GetDateTime(string time, string date);      // get date and time from message
 string ConvertCoordinate(string coor);          // convert DDMM.MM coordinate to DD coordinate (its suitable with google map)
-int GetLocation(string content);              // get location from google map
-int PrintCoordinate();                       // print coordinate
-int PrintLocation();                         // print location got from google map
-int PrintDateTime();                         // print date and time
+int GetLocation(string content);                // get location from google map
+int PrintCoordinate();                          // print coordinate
+int PrintLocation();                            // print location got from google map
+int PrintDateTime();                            // print date and time
 
 int main() {
 
@@ -77,15 +76,15 @@ int main() {
    }
 
    printf("GPS is working : \n");
-   
+   GetMessage();  // wait for the first stuff message. we dont care about this message
+   serialPuts(fd, cmd);    // send command. U can put it inside of while loop below. Put it inside to prevent the case this program send command before module GPS start
    while(1) {
 
       printf("."); fflush(stdout);
-      serialPuts(fd, cmd);    // send command
       string message = GetMessage();
       
       int typeCmd = ClassifyRespond(message);
-      // printf("\nmessage: %s\n", message.c_str());
+      printf("\nmessage: %s\n", message.c_str());
 
       switch (typeCmd) {
          case GPRMC: {     // Handle with GPRMC respond
@@ -94,7 +93,7 @@ int main() {
                   GetLocation(position.latitude + ',' + position.longitude);
                   printf("\n");
                   PrintDateTime();
-                  // PrintCoordinate();
+                  PrintCoordinate();
                   PrintLocation();
                   sleep(2);
                }
@@ -121,7 +120,6 @@ int main() {
       serialFlush(fd);     // clear all old data in buffer
    }
 
-   wait(NULL);
    return 0;
 
 }
@@ -133,7 +131,7 @@ string GetMessage() {
    while(1) {
       if(serialDataAvail(fd)) {
          c = serialGetchar(fd);
-         if(c=='\n') {
+         if(c=='\r') {
             break;
          }
          raw[n] = c;
@@ -237,14 +235,14 @@ int GetLocation(string content) {
    /* Adding structer for server */
    memset(&serv_addr, 0, sizeof(serv_addr));               /* Zero out structure */
    serv_addr.sin_family      = AF_INET;                    /* Internet address family */
-   serv_addr.sin_addr.s_addr = inet_addr(GOOGLE_IP);       /* Server IP address */
+   serv_addr.sin_addr.s_addr = inet_addr(GOOGLE_MAP_IP);       /* Server IP address */
    serv_addr.sin_port        = htons(PORT);                /* Server port */
 
    if (connect(sockfd,(struct sockaddr *) &serv_addr,sizeof(serv_addr)) < 0) 
       perror("ERROR connecting");
 
    // printf("content: %s\n", content);
-
+   // send get method : content include latitude and longtitude
    if (  send(sockfd, GET_BEGIN, strlen(GET_BEGIN),0) < 0 ||
          send(sockfd, content.c_str(), content.length(),0) < 0 ||
          send(sockfd, GET_END, strlen(GET_END),0) < 0 ) {
@@ -284,11 +282,12 @@ int GetLocation(string content) {
 }
 
 string ConvertCoordinate(string coor) {
-   
+
    size_t found = coor.find('.');
    string degree = coor.substr(0, found - 2 );
    string minute = coor.substr(found-2, coor.length()-(found-2));
 
+   // math : decimal = degree + minute/60
    float dd = stof(degree) + stof(minute)/60;
    // printf("degree: %s, minute: %s, decimal: %s\n", degree.c_str(), minute.c_str(), to_string(dd).c_str());
    
