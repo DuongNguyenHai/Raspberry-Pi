@@ -19,8 +19,7 @@
 
 using namespace std;
 
-#define GMT 7
-#define GOOGLE_IP "172.217.4.170"
+#define GOOGLE_MAP_IP "172.217.4.170"
 #define BUFFSIZE 1024
 #define PORT 80
 
@@ -80,6 +79,7 @@ int main() {
    }
    
    printf("GPS is working ");
+   // we will wait until GPS has read data successfully
    while(1) {
       printf("."); fflush(stdout);
       serialPuts(fd, cmd);    // send command
@@ -88,11 +88,10 @@ int main() {
       
       int typeCmd = ClassifyRespond(message);
       if(typeCmd==GPRMC) { 
-         if(HandleGPRMC(message)==0)
+         if(HandleGPRMC(message)==0)   // its mean the message is valid and GPS has read data successfully
             break;
       }
       sleep(1);
-      
    }
 
    printf("\nGPS is already !\n-----------------\n");
@@ -102,7 +101,6 @@ int main() {
       int userCmd = Tracking();
 
       while(1) {
-         serialPuts(fd, cmd);    // send command
          serialFlush(fd);     // clear all old data in buffer
          string message = GetMessage();
          int typeCmd = ClassifyRespond(message);
@@ -138,7 +136,7 @@ string GetMessage() {
    while(1) {
       if(serialDataAvail(fd)) {
          c = serialGetchar(fd);
-         if(c=='\n') {
+         if(c=='\r') {
             break;
          }
          raw[n] = c;
@@ -212,7 +210,7 @@ int GetDateTime(string time, string date) {
   date_time.hour = stoi(dt);
 
   dt = time.substr(2,2);       // get 2 character from index 2
-  date_time.minute = stoi(dt);
+  date_time.minute = stoi(dt); // convert to int
 
   dt = time.substr(4,2);
   date_time.second = stoi(dt);
@@ -242,14 +240,14 @@ int GetLocation(string content) {
    /* Adding structer for server */
    memset(&serv_addr, 0, sizeof(serv_addr));               /* Zero out structure */
    serv_addr.sin_family      = AF_INET;                    /* Internet address family */
-   serv_addr.sin_addr.s_addr = inet_addr(GOOGLE_IP);       /* Server IP address */
+   serv_addr.sin_addr.s_addr = inet_addr(GOOGLE_MAP_IP);       /* Server IP address */
    serv_addr.sin_port        = htons(PORT);                /* Server port */
 
    if (connect(sockfd,(struct sockaddr *) &serv_addr,sizeof(serv_addr)) < 0) 
       perror("ERROR connecting");
 
    // printf("content: %s\n", content);
-
+   // send get method : content include latitude and longtitude
    if (  send(sockfd, GET_BEGIN, strlen(GET_BEGIN),0) < 0 ||
          send(sockfd, content.c_str(), content.length(),0) < 0 ||
          send(sockfd, GET_END, strlen(GET_END),0) < 0 ) {
