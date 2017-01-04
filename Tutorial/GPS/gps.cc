@@ -2,7 +2,7 @@
 // Jun 01 2016
 // Module GPS L70-R
 
-// compile : g++ -std=c++11 gps.cc -o gps -lwiringPi
+// compile : g++ -std=c++11 -Wall gps.cc -o gps -lwiringPi
 
 #include <stdio.h>
 #include <iostream>
@@ -58,6 +58,7 @@ struct type_location {
 
 string GetMessage();
 int ClassifyRespond(string str);                // classify type of message responded from GPS device
+int CheckSum(const char *s);                    // check sum
 int HandleGPRMC(string str);                    // handle with GPRMC message
 int GetDateTime(string time, string date);      // get date and time from message
 string ConvertCoordinate(string coor);          // convert DDMM.MM coordinate to DD coordinate (its suitable with google map)
@@ -145,33 +146,36 @@ string GetMessage() {
 
 int ClassifyRespond(string str) {
 
-   if( str.size()==0 || str.at(0)!='$') {
+   if( str.size()==0 ) {
       // printf("Respond from GPS is not valid !\n");
       return -1;
    }
+
    size_t found = str.find(',');
    if (found==std::string::npos) {
       // printf("not found command in message\n");
       return -1;
    }
+
    string hd = str.substr(1, found-1).c_str();
    hd[found-1] = '\0';
    for(unsigned int i=0; i<sizeof(header)/sizeof(header[0]); i++) {
       if(hd.compare(header[i])==0)
          return (int)i;
    }
+
    return -1;
 }
 
 int HandleGPRMC(string str) {
 
-   // Find out at GPS L70-R datasheet. see structure of respond message in GPRMC table. The commands below will spilit content between two ','
+   // Find out in GPS L70-R datasheet. see structure of respond message in GPRMC table. The commands below will spilit content between two ','
    int GPRMC_ELEMENT = 12;
    string GPRMC_field[GPRMC_ELEMENT];
 
    size_t head = str.find(',');
    GPRMC_field[0] = str.substr(1, head-1);
-
+   // spilit data between two ','
    for (int i = 1; i < GPRMC_ELEMENT-2; ++i) {
       size_t tail = str.find(",", head+1);
       GPRMC_field[i] = str.substr(head+1, tail - (head+1));
@@ -189,6 +193,17 @@ int HandleGPRMC(string str) {
    // for (int i = 0; i < GPRMC_ELEMENT; ++i)
    //    printf("GPRMC_field[%d]: %s\n", i, GPRMC_field[i].c_str());
 
+   string ss = str.substr(1, head-1);
+   // printf("ss: %s\n", ss.c_str());
+   int check = CheckSum((char *)ss.c_str());
+   // printf("checksum (int) %d, (hex) 0x%02X\n", check, check);
+
+   int orign_sum = (int)strtol(GPRMC_field[(GPRMC_ELEMENT-2)+1].c_str(), NULL, 16);
+   // printf("orign_sum %d\n", orign_sum);
+   if(check!=orign_sum) {
+      // printf("checksum is wrong. Data is not valide\n");
+      return -1;
+   }
 
    position.latitude = ConvertCoordinate(GPRMC_field[3]);
    position.longitude = ConvertCoordinate(GPRMC_field[5]);
@@ -292,6 +307,15 @@ string ConvertCoordinate(string coor) {
    // printf("degree: %s, minute: %s, decimal: %s\n", degree.c_str(), minute.c_str(), to_string(dd).c_str());
    
    return to_string(dd);
+}
+
+int CheckSum(const char *s) {
+   int c = 0;
+
+   while(*s)
+      c ^= *s++;
+
+   return c;
 }
 
 int PrintCoordinate() {
