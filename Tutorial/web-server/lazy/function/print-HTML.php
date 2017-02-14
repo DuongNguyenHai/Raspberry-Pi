@@ -78,5 +78,11 @@ function PrintObjectSend() {
             </div>
           </div>';
 }
+
+// Print whatever you want
+
+function PrintEverythingElse() {
+	echo '<div>Print here</div>';
+}
 	
 ?>

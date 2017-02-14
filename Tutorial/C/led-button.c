@@ -1,3 +1,5 @@
+// gcc -Wall led-button.c -o led-button -lwiringPi
+
 #include <wiringPi.h>
 
 int main(void)

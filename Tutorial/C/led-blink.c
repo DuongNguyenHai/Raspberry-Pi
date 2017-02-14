@@ -1,3 +1,5 @@
+// gcc -Wall led-blink.c -o led-blink -lwiringPi
+
 #include <wiringPi.h>
 
 int main(void)
