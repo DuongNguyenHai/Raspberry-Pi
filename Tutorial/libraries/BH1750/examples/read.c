@@ -1,4 +1,4 @@
-// g++ -Wall read.c ../BH1750.cpp ../Wire/Wire.cpp -o read -lwiringPi
+// g++ -Wall read.c ../BH1750.cpp ../Wire/Wire.cpp -o read
 
 #include <stdio.h>
 #include "../BH1750.h"
