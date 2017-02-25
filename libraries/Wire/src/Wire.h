@@ -32,10 +32,10 @@ public:
 	uint8_t write(const uint8_t *dt, uint8_t length);
 	int16_t read();
 	uint8_t read(uint8_t *dt, uint8_t length);
-	uint16_t fd_;
+	
 private:
 	uint16_t addr_;
-	
+	uint16_t fd_;
 	bool transmitting_;
 	uint8_t rxBuffer[I2C_SMBUS_BLOCK_MAX];
 	uint8_t rxBufferIndex;

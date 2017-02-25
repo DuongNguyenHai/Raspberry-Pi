@@ -1,7 +1,7 @@
-// g++ -Wall read.c ../BH1750.cpp ../Wire/Wire.cpp -o read
+// g++ -Wall read.c ../src/BH1750.cpp ../src/Wire/Wire.cpp -o read
 
 #include <stdio.h>
-#include "../BH1750.h"
+#include "../src/BH1750.h"
 
 BH1750 lightMeter;
 
