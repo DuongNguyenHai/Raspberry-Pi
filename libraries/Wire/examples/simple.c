@@ -1,3 +1,5 @@
+// gcc -std=c11 simple.c -o simple
+
 #include <stdio.h>
 #include <unistd.h>
 #include <fcntl.h>
