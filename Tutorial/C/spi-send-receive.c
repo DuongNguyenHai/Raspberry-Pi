@@ -1,3 +1,5 @@
+// gcc -Wall spi-send-receive.c -o spi-send-receive -lwiringPi
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
