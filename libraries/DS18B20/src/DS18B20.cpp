@@ -3,7 +3,6 @@
 DS18B20::~DS18B20() {}
 
 void DS18B20::setAddr(const uint8_t rom[8]) {
-	OneWire::begin();
 	memcpy(addr_, rom, 8);
 }
 

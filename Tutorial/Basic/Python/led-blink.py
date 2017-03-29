@@ -3,11 +3,13 @@
 import RPi.GPIO as GPIO
 from time import sleep
 
+LED = 4
+
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(17, GPIO.OUT)	# set gpio 17 is output
+GPIO.setup(LED, GPIO.OUT)	# set gpio 17 is output
  
 while True:
-    GPIO.output(17, 1)
+    GPIO.output(LED, 1)
     sleep(1)            # sleep 1s
-    GPIO.output(17, 0)
+    GPIO.output(LED, 0)
     sleep(1)            # sleep 1s

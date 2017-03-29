@@ -1,7 +1,7 @@
-// g++ -std=c++11 -Wall main.cc DS18B20.cpp OneWire/OneWire.cpp -o main -lwiringPi
+// g++ -std=c++11 -Wall main.cc src/DS18B20.cpp src/OneWire/OneWire.cpp -o main -lwiringPi
 
 #include <stdio.h>
-#include "DS18B20.h"
+#include "src/DS18B20.h"
 
 uint8_t hot_rom[8] = {0x28, 0xff, 0xc6, 0x13, 0x50, 0x16, 0x4, 0x1a};
 uint8_t cold_rom[8] = {0x28, 0xff, 0xbd, 0xb7, 0x44, 0x16, 0x3, 0xf7};

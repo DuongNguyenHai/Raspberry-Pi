@@ -1,6 +1,6 @@
-// g++ -Wall -std=c++11 ds.cc OneWire/OneWire.cpp -o ds -lwiringPi
+// g++ -Wall -std=c++11 ds18b20.cc ../src/OneWire.cpp -o ds -lwiringPi
 
-#include "OneWire/OneWire.h"
+#include "../src/OneWire.h"
 #include <stdio.h>
 #include <stdint.h>
 #include <wiringPi.h>
@@ -13,8 +13,6 @@ OneWire ds(17);
 int main(int argc, char const *argv[])
 {
    wiringPiSetupGpio();
-
-   ds.begin();
 
    if ( !ds.search(addr) ) {
       printf("No more addresses.\n");

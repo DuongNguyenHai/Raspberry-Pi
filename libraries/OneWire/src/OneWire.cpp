@@ -22,14 +22,10 @@
 
 OneWire::OneWire(uint8_t pin) {
 	pin_ = pin;
+  reset_search();
 }
 
 OneWire::~OneWire() {}
-
-void OneWire::begin() {
-	pinMode_(pin_, INPUT_);
-	reset_search();
-}
 
 // Perform the onewire reset function.  We will wait up to 250uS for
 // the bus to come high, if it doesn't then it is broken or shorted

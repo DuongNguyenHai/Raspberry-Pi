@@ -1,6 +1,9 @@
 /*
  *  dht.c:
  *	read temperature and humidity from DHT11 or DHT22 sensor
+	
+	gcc -Wall dht22.cc -o dht -lwiringPi
+
  */
 
 #include <wiringPi.h>
@@ -9,7 +12,7 @@
 #include <stdint.h>
 
 #define MAX_TIMINGS	85
-#define DHT_PIN		17	/* GPIO-22 */
+#define DHT_PIN		4	/* GPIO-22 */
 
 int data[5] = { 0, 0, 0, 0, 0 };
 
@@ -90,7 +93,7 @@ int main( void )
 
 	if (wiringPiSetupGpio() == -1)
 		exit(1);
-
+	delay(2000);
 	while (1)
 	{
 		read_dht_data();

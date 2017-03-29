@@ -2,16 +2,18 @@
 
 #include <wiringPi.h>
 
+#define LED 4
+
 int main(void)
 {
     wiringPiSetupGpio();
-    pinMode(17, OUTPUT);
+    pinMode(LED, OUTPUT);
     
     while(1)
     {
-        digitalWrite(17, HIGH); 
+        digitalWrite(LED, HIGH); 
         delay(1000);            // delay 1000 ms
-        digitalWrite(17, LOW);
+        digitalWrite(LED, LOW);
         delay(1000);            // delay 1000 ms
     }
     return 0;
