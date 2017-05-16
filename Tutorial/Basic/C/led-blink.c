@@ -2,7 +2,7 @@
 
 #include <wiringPi.h>
 
-#define LED 4
+#define LED 17
 
 int main(void)
 {

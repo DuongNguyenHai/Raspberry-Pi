@@ -2,13 +2,15 @@
 
 #include <wiringPi.h>
 
+#define LED 17
+
 int main(void)
 {
     wiringPiSetupGpio();
-    pinMode(17, OUTPUT);
+    pinMode(LED, OUTPUT);
     
     while(1) {
-        digitalWrite(17, HIGH); 
+        digitalWrite(LED, HIGH); 
     }
     return 0;
 }
