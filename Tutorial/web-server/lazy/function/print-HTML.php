@@ -18,13 +18,8 @@ function PrintObjectDatabase($conn) {
 // Print object
 function PrintObject($objType, $objName, $state, $objFalvor, $amplitude, $icon) {
 
-	if($state) {
-		$stateButton = "switch-on";
-		$stateName = "turn-on";
-	}
-
 	echo '<div class="col-lg-3 col-md-4 col-sm-6 col-xs-6">';
-		echo '<div class="object '.$objType . " " .$objFalvor. " " .$stateName.'">';
+		echo '<div class="object '.$objType . " " .$objFalvor. " " .($state?"turn-on":"").'">';
 			echo '<div class="obj-info">',
 	                '<p class="obj-header">'.$objName.'</p>';
 
@@ -44,7 +39,7 @@ function PrintObject($objType, $objName, $state, $objFalvor, $amplitude, $icon) 
 	        if( $objType == "obj-slider")
 	    		echo '<div class="slider-range-min"></div>';
 	        else if( $objType == "obj-button")
-	        	echo '<div class="switch-button '.$stateButton.'"></div>';
+	        	echo '<div class="switch-button '.($state?"switch-on":"").'"></div>';
 	        else if( $objType == "obj-turn obj-slider" ) {
 	        	echo '<div class="switch-button type-turn"></div>
 	        			<div class="obj-off"><i class="fa fa-close"></i></div>
@@ -77,12 +72,6 @@ function PrintObjectSend() {
               <div class="clearfix"></div>
             </div>
           </div>';
-}
-
-// Print whatever you want
-
-function PrintEverythingElse() {
-	echo '<div>Print here</div>';
 }
 	
 ?>
