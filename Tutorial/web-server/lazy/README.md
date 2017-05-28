@@ -57,7 +57,7 @@ thiết bị của riêng mình.
 
 Tạo master điều khiển. Truy cập thư mục master và biên dịch master :
 
-	$ gcc -o server-thread server-thread.c -lpthread
+	$ gcc -std=c11 -Wall -g -D_BSD_SOURCE server-thread.c -o server-thread -lpthread
 
 Điều khiển bằng trình duyệt :
 

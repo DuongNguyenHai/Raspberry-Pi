@@ -15,11 +15,11 @@
 
 
 // Function : creat tco server socket
-int CreateTCPServerSocket(unsigned short port);
+int createTCPServerSocket(unsigned short port);
 
 // Function : accept tcp connection
 // Return server socket
-int AcceptTCPConnection(int servSock);
+int acceptTCPConnection(int servSock);
 
 
 

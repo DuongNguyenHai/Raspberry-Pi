@@ -20,32 +20,31 @@ char *IdDevice[4][3] = { {"Living Room Light", "L1", NULL},
                     {"Font Door", "D1", NULL},
 };
 
-void ServerCommand(char *str);
-bool IdentifyDevice(int clntSock, char *str);
+void serverCommand(char *str);
+bool identifyDevice(int clntSock, char *str);
 // Function : handle client
-void *HandleThreadClient(void *socket_desc);
+void *handleThreadClient(void *socket_desc);
 // send a command to device 
-bool SendCommandToDevice(int index, char *str);
+bool sendCommandToDevice(int index, char *str);
 // sizeof(IdDevice)/sizeof(IdDevice[0][0])/2 : the number of row
 #define SIZE_OF_ARRY2(array2) (sizeof(array2)/sizeof(array2[0][0])/3) 
 
 int servSock;   // global variable
 
-int main(int argc, char *argv[]){
+int main(int argc, char *argv[]) {
 
     int clntSock;
     struct sockaddr_in cli_addr;
     pthread_t threadID;              /* Thread ID from pthread_create() */
     struct ThreadArgs *threadArgs;   /* Pointer to argument structure for thread */
     unsigned int clntLen;            /* Length of client address data structure */
-
     clntLen = sizeof(cli_addr);
 
-    servSock = CreateTCPServerSocket(PORT);
+    servSock = createTCPServerSocket(PORT);
 
     while(1) {
 
-        clntSock = AcceptTCPConnection(servSock);
+        clntSock = acceptTCPConnection(servSock);
 
         getpeername(clntSock, (struct sockaddr *) &cli_addr, &clntLen);
 
@@ -56,7 +55,7 @@ int main(int argc, char *argv[]){
         threadArgs -> clntSock = clntSock;
         threadArgs -> addr = inet_ntoa(cli_addr.sin_addr);
 
-        if (pthread_create(&threadID, NULL, HandleThreadClient, (void *) threadArgs) != 0)
+        if (pthread_create(&threadID, NULL, handleThreadClient, (void *) threadArgs) != 0)
             error("pthread_create() failed");
 
         // printf("\n+ New client[%d][Addr:%s]\n\n", 
@@ -67,7 +66,7 @@ int main(int argc, char *argv[]){
     return 0; 
 }
 
-void *HandleThreadClient(void *threadArgs){
+void *handleThreadClient(void *threadArgs){
     int clntSock;
     int recvMsgSize;
     char buffer[BUFFSIZE];
@@ -75,26 +74,27 @@ void *HandleThreadClient(void *threadArgs){
 
     clntSock = ((struct ThreadArgs *) threadArgs) -> clntSock;
     
-    while(1){
+    while(1) {
         recvMsgSize = recv(clntSock,buffer,BUFFSIZE,0);
         if (recvMsgSize < 0) {
             printf("ERROR reading from socket\n");
         }
-        else if(recvMsgSize>0){
-            
-            if( !strcmp(((struct ThreadArgs *) threadArgs) -> addr, localhost) ) { // if data from server   
+        else if(recvMsgSize>0) {
+            char tmp[BUFFSIZE];
+            strncpy(tmp, buffer, BUFFSIZE);
+            char *header = strtok(tmp, ":");
+            if( !strcmp(((struct ThreadArgs *) threadArgs) -> addr, localhost) && strcmp(header,"INIT") ) { // if data from server   
                 printf(". Web server: %s\n", buffer);
-                ServerCommand(buffer);
+                serverCommand(buffer);
             }else {
                 printf(". Device: %s\n", buffer);
                 // Check command of device
-                char *header = strtok(buffer, ":");
     			char *content = strtok(NULL, ":");
                 if(strcmp(header,"RESULT")==0) { // result command
                     // response from device
                     printf(". Address[%s]: %s\n", ((struct ThreadArgs *) threadArgs) -> addr, content);
                 } else if (strcmp(header,"INIT")==0) {    // Init a new device command
-                    IdentifyDevice(clntSock, content);
+                    identifyDevice(clntSock, content);
                 } else {
                     // other command
                 }
@@ -110,14 +110,14 @@ void *HandleThreadClient(void *threadArgs){
                 // u can handle with client-disconnected event
                 // code here
             }
-            
             break;
         }     
     }
     close(clntSock);
+    return NULL;
 }
 
-void ServerCommand(char *str) {
+void serverCommand(char *str) {
 
     char *header = strtok(str, ":");
     char *content = strtok(NULL, ":");
@@ -126,7 +126,7 @@ void ServerCommand(char *str) {
             if(strcmp(header, IdDevice[i][0])==0) {
                 // printf("header: %s, IdDevice: %s, content: %s\n", header, IdDevice[i][1], content);
                 if(IdDevice[i][2]!=NULL)    // check if has device
-                    SendCommandToDevice(i, content);
+                    sendCommandToDevice(i, content);
                 else
                     printf("- There is no device: \"%s\"\n", IdDevice[i][0]);
                 // break;       // break when u just wanna send to one device
@@ -134,10 +134,10 @@ void ServerCommand(char *str) {
     }
 }
 
-bool IdentifyDevice(int clntSock, char *str) {
+bool identifyDevice(int clntSock, char *str) {
 
     for (int i = 0; i < SIZE_OF_ARRY2(IdDevice); ++i) { 
-        if(IdDevice[i][0]) // check if IdDevice[i][0] is not NULL
+        if(IdDevice[i][0]) {// check if IdDevice[i][0] is not NULL
             if(strcmp(str, IdDevice[i][1])==0) {
                 printf("+ Detecting a new device: %s, ID:%s\n\n", IdDevice[i][0], IdDevice[i][1]);
                 if ( send(clntSock, SET,strlen(SET),0) < 0) { // send "OK"
@@ -149,11 +149,12 @@ bool IdentifyDevice(int clntSock, char *str) {
                 IdDevice[i][2] = strdup(clientAddr);    // save to IdDevice
                 return true;
             }
+        }
     }
     return false;
 }
 
-bool SendCommandToDevice(int index, char *str) {
+bool sendCommandToDevice(int index, char *str) {
 
     int clntSock = atoi(IdDevice[index][2]);
     if ( send(clntSock, str,strlen(str),0) < 0) {

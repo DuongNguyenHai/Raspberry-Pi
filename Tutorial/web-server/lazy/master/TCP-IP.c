@@ -11,7 +11,7 @@ void error(const char *msg){
     exit(1);
 }
 
-int CreateTCPServerSocket(unsigned short port){
+int createTCPServerSocket(unsigned short port){
     int servSock;                        /* socket to create */
     struct sockaddr_in serv_addr;      /* Local address */
 
@@ -21,8 +21,12 @@ int CreateTCPServerSocket(unsigned short port){
     
     int reuse=1;
     if (setsockopt(servSock, SOL_SOCKET, SO_REUSEADDR, (char *)&reuse, sizeof(int)) == -1){
-        printf("Reuse port Error : \n");
+        error("Reuse port Error : \n");
     }
+    #ifdef SO_REUSEPORT
+        if (setsockopt(servSock, SOL_SOCKET, SO_REUSEPORT, (const char*)&reuse, sizeof(reuse)) < 0) 
+            error("setsockopt(SO_REUSEPORT) failed");
+    #endif
 
     /* Construct local address structure */
     memset(&serv_addr, 0, sizeof(serv_addr));   /* Zero out structure */
@@ -41,7 +45,7 @@ int CreateTCPServerSocket(unsigned short port){
     return servSock;
 }
 
-int AcceptTCPConnection(int servSock){
+int acceptTCPConnection(int servSock){
     int clntSock;                    /* Socket descriptor for client */
     struct sockaddr_in cli_addr;    /* Client address */
     unsigned int clntLen;            /* Length of client address data structure */

@@ -1,7 +1,6 @@
 // Nguyen Hai Duong
-// simple client
-// notice that client has the same ip with server. so its correspond to web-server.
-// To test it lets change 
+// simple client. It will be used as the fake client to test with web-server
+// compile : gcc client.c -o client
 
 #include <stdio.h>      /* for printf() and fprintf() */
 #include <sys/socket.h> /* for socket(), connect(), send(), and recv() */
@@ -31,7 +30,7 @@ void error(const char *msg){
 
 bool SentID();
 
-int main(int argc, char *argv[]){
+int main(int argc, char *argv[]) {
 
     struct sockaddr_in serv_addr;
 
